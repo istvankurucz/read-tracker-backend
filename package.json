@@ -1,0 +1,41 @@
+{
+	"name": "read-tracker-backend",
+	"version": "1.0.0",
+	"description": "Express+TS server for read-tracker mobile app.",
+	"license": "ISC",
+	"author": "István Kurucz",
+	"type": "module",
+	"main": "dist/server.js",
+	"scripts": {
+		"build": "npx tsc",
+		"start": "node dist/server.js",
+		"dev": "nodemon src/server.ts",
+		"test": "vitest",
+		"test:coverage": "vitest --coverage",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:studio": "drizzle-kit studio"
+	},
+	"dependencies": {
+		"@supabase/supabase-js": "^2.50.3",
+		"axios": "^1.10.0",
+		"cors": "^2.8.5",
+		"dotenv": "^17.1.0",
+		"drizzle-orm": "^0.44.2",
+		"express": "^5.1.0",
+		"multer": "^2.0.1",
+		"postgres": "^3.4.7",
+		"zod": "^3.25.76"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.3",
+		"@types/multer": "^2.0.0",
+		"@types/node": "^24.0.10",
+		"drizzle-kit": "^0.31.4",
+		"nodemon": "^3.1.10",
+		"ts-node": "^10.9.2",
+		"tsx": "^4.20.3",
+		"typescript": "^5.8.3"
+	}
+}
