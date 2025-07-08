@@ -4,7 +4,7 @@
 	"description": "Express+TS server for read-tracker mobile app.",
 	"license": "ISC",
 	"author": "István Kurucz",
-	"type": "module",
+	"type": "commonjs",
 	"main": "dist/server.js",
 	"scripts": {
 		"build": "npx tsc",
