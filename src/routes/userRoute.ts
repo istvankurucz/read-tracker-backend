@@ -1,12 +1,10 @@
 import { Router } from "express";
-import authUserMW from "../middlewares/auth/auth/authUserMW";
+import authUserMW from "../middlewares/auth/authUserMW";
 import returnUserMW from "../middlewares/user/returnUserMW";
 import validateUserIdMW from "../middlewares/user/validateUserIdMW";
 import getUserMW from "../middlewares/user/getUserMW";
-import checkUserUpdateAccessMW from "../middlewares/user/checkUpdateUserAccessMW";
 import validateUpdateUserDataMW from "../middlewares/user/validateUpdateUserDataMW";
 import updateUserMW from "../middlewares/user/updateUserMW";
-import checkDeleteUserAccessMW from "../middlewares/user/checkDeleteUserAccessMW";
 import deleteAuthUserMW from "../middlewares/user/deleteAuthUserMW";
 import sendUserDeletedResponseMW from "../middlewares/user/sendUserDeletedResponseMW";
 
@@ -24,19 +22,13 @@ router.get("/:userId", validateUserIdMW, getUserMW, returnUserMW);
 router.put(
 	"/:userId",
 	validateUserIdMW,
-	checkUserUpdateAccessMW,
+	getUserMW,
 	validateUpdateUserDataMW,
 	updateUserMW,
 	returnUserMW
 );
 
 // Delete user
-router.delete(
-	"/:userId",
-	validateUserIdMW,
-	checkDeleteUserAccessMW,
-	deleteAuthUserMW,
-	sendUserDeletedResponseMW
-);
+router.delete("/:userId", validateUserIdMW, getUserMW, deleteAuthUserMW, sendUserDeletedResponseMW);
 
 export { router as userRoute };

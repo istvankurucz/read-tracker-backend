@@ -3,21 +3,20 @@ import { UpdateUserData } from "../../utils/user/validation/schemas/updateUserSc
 import updateUser from "../../services/user/updateUser";
 import { UserSelect } from "../../types/userTypes";
 import checkNonEmptyObject from "../../utils/general/checkNonEmptyObject";
-import getUser from "../../services/user/getUser";
 
-export default async function updateUserMW(req: Request, res: Response, next: NextFunction) {
-	// Get user ID and user data
-	const { userId } = req.params as { userId: string };
-	const { userData } = res.locals as { userData: UpdateUserData };
+export default async function updateUserMW(_: Request, res: Response, next: NextFunction) {
+	// Get user data
+	const { user, userData } = res.locals as { user: UserSelect; userData: UpdateUserData };
+
+	// Check update data
+	if (!checkNonEmptyObject(userData)) return next();
 
 	try {
 		// Update user
-		const user = checkNonEmptyObject(userData)
-			? await updateUser(userId, userData)
-			: await getUser(userId);
+		const updatedUser = await updateUser(user.id, userData);
 
 		// Add user to res.locals
-		(res.locals.user as UserSelect) = user;
+		(res.locals.user as UserSelect) = updatedUser;
 
 		// Go to next MW
 		return next();
