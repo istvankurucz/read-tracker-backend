@@ -11,10 +11,10 @@ export const friendshipStatusEnum = pgEnum("friendship_status", friendshipStatus
 export const FriendshipTable = pgTable(
 	"friendship",
 	{
-		user1Id: uuid("user1_id")
+		requesterId: uuid("requester_id")
 			.notNull()
 			.references(() => UserTable.id, { onDelete: "cascade" }),
-		user2Id: uuid("user2_id")
+		addresseeId: uuid("addressee_id")
 			.notNull()
 			.references(() => UserTable.id, { onDelete: "cascade" }),
 		status: friendshipStatusEnum("status").notNull().default("pending"),
@@ -22,21 +22,20 @@ export const FriendshipTable = pgTable(
 		createdAt,
 	},
 	(friendship) => [
-		primaryKey({ columns: [friendship.user1Id, friendship.user2Id] }),
-		check("user_id_order", sql`${friendship.user1Id} < ${friendship.user2Id}`),
-		unique("unique_friendship_pair").on(friendship.user1Id, friendship.user2Id),
+		primaryKey({ columns: [friendship.requesterId, friendship.addresseeId] }),
+		unique("unique_friendship_pair").on(friendship.requesterId, friendship.addresseeId),
 	]
 );
 
 // Relations
 export const FriendshipTableRelations = relations(FriendshipTable, ({ one }) => {
 	return {
-		user1: one(UserTable, {
-			fields: [FriendshipTable.user1Id],
+		requester: one(UserTable, {
+			fields: [FriendshipTable.requesterId],
 			references: [UserTable.id],
 		}),
-		user2: one(UserTable, {
-			fields: [FriendshipTable.user2Id],
+		addressee: one(UserTable, {
+			fields: [FriendshipTable.addresseeId],
 			references: [UserTable.id],
 		}),
 	};
