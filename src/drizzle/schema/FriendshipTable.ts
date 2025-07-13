@@ -1,7 +1,7 @@
-import { check, pgEnum, pgTable, primaryKey, unique, uuid } from "drizzle-orm/pg-core";
-import { createdAt, updatedAt } from "../schemaHelpers";
+import { pgEnum, pgTable, unique, uuid } from "drizzle-orm/pg-core";
+import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { UserTable } from "./UserTable";
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { friendshipStatusOptions } from "../../constants/friendships/friendshipConstants";
 
 // Enums
@@ -11,6 +11,7 @@ export const friendshipStatusEnum = pgEnum("friendship_status", friendshipStatus
 export const FriendshipTable = pgTable(
 	"friendship",
 	{
+		id,
 		requesterId: uuid("requester_id")
 			.notNull()
 			.references(() => UserTable.id, { onDelete: "cascade" }),
@@ -22,7 +23,6 @@ export const FriendshipTable = pgTable(
 		createdAt,
 	},
 	(friendship) => [
-		primaryKey({ columns: [friendship.requesterId, friendship.addresseeId] }),
 		unique("unique_friendship_pair").on(friendship.requesterId, friendship.addresseeId),
 	]
 );

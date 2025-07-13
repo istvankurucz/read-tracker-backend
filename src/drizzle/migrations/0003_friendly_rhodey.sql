@@ -1,0 +1,2 @@
+ALTER TABLE "friendship" DROP CONSTRAINT "friendship_requester_id_addressee_id_pk";--> statement-breakpoint
+ALTER TABLE "friendship" ADD COLUMN "id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL;
