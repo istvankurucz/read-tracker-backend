@@ -1,4 +1,4 @@
-import { char, check, integer, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { check, integer, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { relations, sql } from "drizzle-orm";
 import { BookAuthorTable } from "./BookAuthorTable";
@@ -7,6 +7,7 @@ import { RatingTable } from "./RatingTable";
 import { ReadingTable } from "./ReadingTable";
 import { ListBookTable } from "./ListBookTable";
 import { languageCodeOptions } from "../../constants/book/languageConstants";
+import { UserTable } from "./UserTable";
 
 // Enums
 export const languageEnum = pgEnum("book_language", languageCodeOptions);
@@ -25,6 +26,9 @@ export const BookTable = pgTable(
 		genre: text("genre"),
 		description: text("description"),
 		releaseDate: timestamp("release_date"),
+		userId: uuid("user_id")
+			.notNull()
+			.references(() => UserTable.id),
 		updatedAt,
 		createdAt,
 	},
@@ -44,9 +48,13 @@ export const BookTable = pgTable(
 );
 
 // Relations
-export const BookTableRelations = relations(BookTable, ({ many }) => {
+export const BookTableRelations = relations(BookTable, ({ one, many }) => {
 	return {
 		authors: many(BookAuthorTable),
+		user: one(UserTable, {
+			fields: [BookTable.userId],
+			references: [UserTable.id],
+		}),
 		users: many(UserBookTable),
 		ratings: many(RatingTable),
 		readings: many(ReadingTable),

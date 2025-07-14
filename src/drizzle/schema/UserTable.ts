@@ -5,6 +5,7 @@ import { RatingTable } from "./RatingTable";
 import { ReadingTable } from "./ReadingTable";
 import { GoalTable } from "./GoalTable";
 import { ListTable } from "./ListTable";
+import { BookTable } from "./BookTable";
 
 // Schema
 export const UserTable = pgTable(
@@ -20,6 +21,7 @@ export const UserTable = pgTable(
 export const UserTableRelations = relations(UserTable, ({ many }) => {
 	return {
 		// No friendship link
+		booksAdded: many(BookTable),
 		books: many(UserBookTable),
 		ratings: many(RatingTable),
 		readings: many(ReadingTable),
