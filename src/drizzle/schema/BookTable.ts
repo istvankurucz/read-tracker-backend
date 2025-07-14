@@ -1,4 +1,4 @@
-import { check, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { char, check, integer, pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { relations, sql } from "drizzle-orm";
 import { BookAuthorTable } from "./BookAuthorTable";
@@ -6,6 +6,10 @@ import { UserBookTable } from "./UserBookTable";
 import { RatingTable } from "./RatingTable";
 import { ReadingTable } from "./ReadingTable";
 import { ListBookTable } from "./ListBookTable";
+import { languageCodeOptions } from "../../constants/book/languageConstants";
+
+// Enums
+export const languageEnum = pgEnum("book_language", languageCodeOptions);
 
 // Schema
 export const BookTable = pgTable(
@@ -16,6 +20,8 @@ export const BookTable = pgTable(
 		subtitle: text("subtitle"),
 		coverUrl: text("cover_url").notNull(),
 		pages: integer("pages").notNull(),
+		language: languageEnum("language").notNull(),
+		isbn: text("isbn"),
 		genre: text("genre"),
 		description: text("description"),
 		releaseDate: timestamp("release_date"),
