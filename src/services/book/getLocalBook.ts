@@ -1,0 +1,46 @@
+import { eq, sql } from "drizzle-orm";
+import { db } from "../../drizzle/db";
+import { BookAuthorTable } from "../../drizzle/schema/BookAuthorTable";
+import { BookTable } from "../../drizzle/schema/BookTable";
+import { Book } from "../../types/bookTypes";
+import { AuthorTable } from "../../drizzle/schema/AuthorTable";
+import { AuthorSelect } from "../../types/authorTypes";
+import { UserTable } from "../../drizzle/schema/UserTable";
+import AppError from "../../classes/AppError";
+
+export default async function getLocalBook(id: string): Promise<Book> {
+	// Get book
+	const [book] = await db
+		.select({
+			id: BookTable.id,
+			title: BookTable.title,
+			subtitle: BookTable.subtitle,
+			authors: sql<
+				AuthorSelect[]
+			>`array_agg(json_build_object('id', ${AuthorTable.id}, 'name', ${AuthorTable.name}))`,
+			coverUrl: BookTable.coverUrl,
+			pages: BookTable.pages,
+			language: BookTable.language,
+			isbn: BookTable.isbn,
+			genre: BookTable.genre,
+			description: BookTable.description,
+			releaseDate: BookTable.releaseDate,
+			user: {
+				id: UserTable.id,
+				name: UserTable.name,
+			},
+			updatedAt: BookTable.updatedAt,
+			createdAt: BookTable.createdAt,
+		})
+		.from(BookTable)
+		.innerJoin(BookAuthorTable, eq(BookAuthorTable.bookId, BookTable.id))
+		.innerJoin(AuthorTable, eq(BookAuthorTable.authorId, AuthorTable.id))
+		.innerJoin(UserTable, eq(BookTable.userId, UserTable.id))
+		.where(eq(BookTable.id, id));
+
+	// Check book
+	if (!book) throw new AppError({ message: "Book not found.", status: 404 });
+
+	// Return book
+	return { ...book, source: "local" };
+}
