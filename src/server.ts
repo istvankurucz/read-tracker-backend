@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { userRoute } from "./routes/userRoute";
+import { friendshipRote } from "./routes/friendshipRoute";
+import { bookRoute } from "./routes/bookRoute";
 import handleErrorMW from "./middlewares/error/handleErrorMW";
 
 // Create app instance
@@ -13,6 +15,8 @@ app.use(express.json());
 
 // Routes
 app.use("/api/users", userRoute);
+app.use("/api/users/:userId/friendships", friendshipRote);
+app.use("/api/books", bookRoute);
 
 // Error handler
 app.use(handleErrorMW);
