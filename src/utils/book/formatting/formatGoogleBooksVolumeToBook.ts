@@ -1,6 +1,6 @@
-import { Book, GoogleBooksVolume } from "../../../types/bookTypes";
+import { GoogleBook, GoogleBooksVolume } from "../../../types/bookTypes";
 
-export default function formatGoogleBooksVolumeToBook(volume: GoogleBooksVolume): Book {
+export default function formatGoogleBooksVolumeToBook(volume: GoogleBooksVolume): GoogleBook {
 	// ISBN
 	const isbn =
 		volume.volumeInfo.industryIdentifiers?.find((identifier) => identifier.type === "ISBN_10")

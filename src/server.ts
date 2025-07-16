@@ -4,6 +4,7 @@ import cors from "cors";
 import { userRoute } from "./routes/userRoute";
 import { friendshipRote } from "./routes/friendshipRoute";
 import { bookRoute } from "./routes/bookRoute";
+import { authorRoute } from "./routes/authorRoute";
 import handleErrorMW from "./middlewares/error/handleErrorMW";
 
 // Create app instance
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/users/:userId/friendships", friendshipRote);
 app.use("/api/books", bookRoute);
+app.use("/api/authors", authorRoute);
 
 // Error handler
 app.use(handleErrorMW);

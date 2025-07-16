@@ -2,13 +2,13 @@ import { eq, sql } from "drizzle-orm";
 import { db } from "../../drizzle/db";
 import { BookAuthorTable } from "../../drizzle/schema/BookAuthorTable";
 import { BookTable } from "../../drizzle/schema/BookTable";
-import { Book } from "../../types/bookTypes";
+import { LocalBook } from "../../types/bookTypes";
 import { AuthorTable } from "../../drizzle/schema/AuthorTable";
 import { AuthorSelect } from "../../types/authorTypes";
 import { UserTable } from "../../drizzle/schema/UserTable";
 import AppError from "../../classes/AppError";
 
-export default async function getLocalBook(id: string): Promise<Book> {
+export default async function getLocalBook(id: string): Promise<LocalBook> {
 	// Get book
 	const [book] = await db
 		.select({

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import validateFriendSearchData from "../../utils/friend/validation/validateFriendSearchData";
-import { FriendSearchData } from "../../utils/friend/validation/schemas/friendSearchSchema";
+import validateAuthorSearchData from "../../utils/author/validation/validateAuthorSearchData";
+import { AuthorSearchData } from "../../utils/author/validation/schemas/authorSearchSchemas";
 
-export default function validateFriendSearchDataMW(
+export default function validateAuthorSearchDataMW(
 	req: Request,
 	res: Response,
 	next: NextFunction
@@ -12,13 +12,13 @@ export default function validateFriendSearchDataMW(
 
 	try {
 		// Validation
-		const searchData = validateFriendSearchData({
+		const searchData = validateAuthorSearchData({
 			q,
 			limit: limit === "undefined" ? undefined : parseInt(limit),
 		});
 
 		// Add validated data to res.locals
-		(res.locals.searchData as FriendSearchData) = searchData;
+		(res.locals.searchData as AuthorSearchData) = searchData;
 
 		// Go to next MW
 		return next();

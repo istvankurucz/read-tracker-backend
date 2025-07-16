@@ -1,8 +1,8 @@
 import { googleBooksClient } from "../../config/axios";
-import { Book, GoogleBooksVolume } from "../../types/bookTypes";
+import { GoogleBook, GoogleBooksVolume } from "../../types/bookTypes";
 import formatGoogleBooksVolumeToBook from "../../utils/book/formatting/formatGoogleBooksVolumeToBook";
 
-export default async function getGoogleBook(id: string): Promise<Book> {
+export default async function getGoogleBook(id: string): Promise<GoogleBook> {
 	// Get book
 	const { data: response } = await googleBooksClient.get<GoogleBooksVolume>(`/${id}`);
 

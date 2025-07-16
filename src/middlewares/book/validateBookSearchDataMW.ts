@@ -4,13 +4,13 @@ import { BookSearchData } from "../../utils/book/validation/schemas/bookSearchSc
 
 export default function validateBookSearchDataMW(req: Request, res: Response, next: NextFunction) {
 	// Get query params
-	const { q, limit } = req.query as { q: string; limit: string | undefined };
+	const { q, limit } = req.query as { q: string; limit: string };
 
 	try {
 		// Validation
 		const searchData = validateBookSearchData({
 			q,
-			limit: limit == undefined ? undefined : parseInt(limit),
+			limit: limit === "undefined" ? undefined : parseInt(limit),
 		});
 
 		// Add validated data to res.locals
