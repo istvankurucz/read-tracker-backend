@@ -1,4 +1,4 @@
-import { check, pgTable, text } from "drizzle-orm/pg-core";
+import { check, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core";
 import { id } from "../schemaHelpers";
 import { relations, sql } from "drizzle-orm";
 import { BookAuthorTable } from "./BookAuthorTable";
@@ -10,7 +10,10 @@ export const AuthorTable = pgTable(
 		id,
 		name: text("name").notNull(),
 	},
-	(author) => [check("name_min_length", sql`char_length(${author.name}) > 0`)]
+	(author) => [
+		check("name_min_length", sql`char_length(${author.name}) > 0`),
+		uniqueIndex("unique_lower_name").on(sql`lower(${author.name})`),
+	]
 );
 
 // Relations
