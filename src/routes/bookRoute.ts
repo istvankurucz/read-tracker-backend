@@ -1,6 +1,5 @@
 import { Router } from "express";
 import authUserMW from "../middlewares/auth/authUserMW";
-import getUserMW from "../middlewares/user/getUserMW";
 import validateBookSearchDataMW from "../middlewares/book/validateBookSearchDataMW";
 import searchLocalBooksMW from "../middlewares/book/searchLocalBooksMW";
 import searchGoogleBooksMW from "../middlewares/book/searchGoogleBooksMW";

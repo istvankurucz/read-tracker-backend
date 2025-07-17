@@ -27,11 +27,10 @@ export default async function updateBookAuthorsMW(_: Request, res: Response, nex
 		await deleteBookAuthors(book.id, authorIdsToRemove);
 
 		// Create book-author joins
-		const newBookAuthors = await createBookAuthors(book.id, authorIdsToAdd);
+		await createBookAuthors(book.id, authorIdsToAdd);
 
 		// Fetch authors
-		const newBookAuthorIds = newBookAuthors.map((record) => record.authorId);
-		const createdAuthors = await getAuthors(newBookAuthorIds);
+		const createdAuthors = await getAuthors(authorIdsToAdd);
 
 		// Get new author
 		const newAuthors = [
