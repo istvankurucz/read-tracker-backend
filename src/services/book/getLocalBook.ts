@@ -36,7 +36,23 @@ export default async function getLocalBook(id: string): Promise<LocalBook> {
 		.innerJoin(BookAuthorTable, eq(BookAuthorTable.bookId, BookTable.id))
 		.innerJoin(AuthorTable, eq(BookAuthorTable.authorId, AuthorTable.id))
 		.innerJoin(UserTable, eq(BookTable.userId, UserTable.id))
-		.where(eq(BookTable.id, id));
+		.where(eq(BookTable.id, id))
+		.groupBy(
+			BookTable.id,
+			BookTable.title,
+			BookTable.subtitle,
+			BookTable.coverUrl,
+			BookTable.pages,
+			BookTable.language,
+			BookTable.isbn,
+			BookTable.genre,
+			BookTable.description,
+			BookTable.releaseDate,
+			UserTable.id,
+			UserTable.name,
+			BookTable.updatedAt,
+			BookTable.createdAt
+		);
 
 	// Check book
 	if (!book) throw new AppError({ message: "Book not found.", status: 404 });

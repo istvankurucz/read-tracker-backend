@@ -2,7 +2,7 @@ import { Request } from "express";
 import multer, { FileFilterCallback } from "multer";
 import AppError from "../classes/AppError";
 
-const imageUpload = multer({
+export const imageUpload = multer({
 	storage: multer.memoryStorage(),
 	fileFilter: (_: Request, file: Express.Multer.File, cb: FileFilterCallback) => {
 		// Check mime type
@@ -13,5 +13,3 @@ const imageUpload = multer({
 		cb(null, true);
 	},
 });
-
-export { imageUpload };

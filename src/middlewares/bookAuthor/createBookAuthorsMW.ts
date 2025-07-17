@@ -1,15 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateBookData } from "../../utils/book/validation/schemas/createBookSchema";
 import { BookSelect } from "../../types/bookTypes";
-import createBookAuthors from "../../services/bookAuthor/createBookAuthors";
 import { AuthorSelect } from "../../types/authorTypes";
-import getAuthors from "../../services/author/getAuthors";
-import validateUUID from "../../utils/general/validateUUID";
-import getAuthor from "../../services/author/getAuthor";
 import createBookAuthor from "../../services/bookAuthor/createBookAuthor";
-import getAuthorByName from "../../services/author/getAuthorByName";
-import AppError from "../../classes/AppError";
-import createAuthor from "../../services/author/createAuthor";
 import getAuthorFromBookData from "../../utils/book/getAuthorFromBookData";
 
 export default async function createBookAuthorsMW(_: Request, res: Response, next: NextFunction) {

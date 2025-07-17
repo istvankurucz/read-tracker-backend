@@ -1,12 +1,12 @@
 import AppError from "../../classes/AppError";
-import { bookCoverPhotosBucket, supabase } from "../../config/supabase";
+import { bookCoverPhotosBucket, supabase, supabaseAdmin } from "../../config/supabase";
 
 export default async function uploadBookPhoto(
 	file: Express.Multer.File,
 	bookId: string
 ): Promise<{ url: string }> {
 	// Upload file
-	const { data: uploadData, error: uploadError } = await supabase.storage
+	const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
 		.from(bookCoverPhotosBucket)
 		.upload(`${bookId}/${file.originalname}`, file.buffer);
 

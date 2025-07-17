@@ -13,7 +13,7 @@ export default async function createBookMW(_: Request, res: Response, next: Next
 		const book = await createBook({
 			title: bookData.title,
 			subtitle: bookData.subtitle,
-			coverUrl: bookData.coverUrl ?? "",
+			coverUrl: bookData.coverUrl ?? "URL to be updated.",
 			pages: bookData.pages,
 			language: bookData.language,
 			isbn: bookData.isbn,
