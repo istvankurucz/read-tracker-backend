@@ -5,7 +5,9 @@ export const updateBookSchema = z
 	.object({
 		title: z.string().trim().nonempty("Title missing."),
 		subtitle: z.string().trim().nonempty("Subtitle missing."),
-		authors: z.array(z.uuid("Invalid author ID.")).min(1, "Author missing."),
+		authors: z
+			.array(z.string().trim().nonempty("Author data missing."))
+			.min(1, "Author missing."),
 		coverUrl: z.url(),
 		pages: z.number().min(1, "Pages mut be a positive number."),
 		language: languageSchema,

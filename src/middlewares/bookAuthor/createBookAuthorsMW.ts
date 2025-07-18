@@ -1,25 +1,27 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateBookData } from "../../utils/book/validation/schemas/createBookSchema";
 import { BookSelect } from "../../types/bookTypes";
-import { AuthorSelect } from "../../types/authorTypes";
+import { Author } from "../../types/authorTypes";
 import createBookAuthor from "../../services/bookAuthor/createBookAuthor";
 import getAuthorFromBookData from "../../utils/book/getAuthorFromBookData";
+import { UserSelect } from "../../types/userTypes";
 
 export default async function createBookAuthorsMW(_: Request, res: Response, next: NextFunction) {
-	// Get book, book data, authors
-	const { book, bookData } = res.locals as {
+	// Get user, book, book data, authors
+	const { user, book, bookData } = res.locals as {
+		user: UserSelect;
 		book: BookSelect;
 		bookData: CreateBookData;
 	};
 
 	// Initialize authors array
-	const authors: AuthorSelect[] = [];
+	const authors: Author[] = [];
 
 	try {
 		// Go through every author
 		for (const authorData of bookData.authors) {
 			// Get author based on author data
-			const author = await getAuthorFromBookData(authorData);
+			const author = await getAuthorFromBookData(authorData, { userId: user.id });
 
 			// Create book-author join
 			await createBookAuthor({ bookId: book.id, authorId: author.id });
@@ -29,7 +31,7 @@ export default async function createBookAuthorsMW(_: Request, res: Response, nex
 		}
 
 		// Add authors to res.locals
-		(res.locals.authors as AuthorSelect[]) = authors;
+		(res.locals.authors as Author[]) = authors;
 
 		// Go to next MW
 		return next();

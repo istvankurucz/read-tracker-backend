@@ -4,3 +4,7 @@ import { AuthorTable } from "../drizzle/schema/AuthorTable";
 export type AuthorSelect = typeof AuthorTable.$inferSelect;
 export type AuthorInsert = typeof AuthorTable.$inferInsert;
 //#endregion
+
+//#region Author
+export type Author = Omit<AuthorSelect, "userId">;
+//#endregion

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AuthorSearchData } from "../../utils/author/validation/schemas/authorSearchSchemas";
-import { AuthorSelect } from "../../types/authorTypes";
+import { Author } from "../../types/authorTypes";
 import searchAuthors from "../../services/author/searchAuthors";
 
 export default async function searchAuthorsMW(_: Request, res: Response, next: NextFunction) {
@@ -14,7 +14,7 @@ export default async function searchAuthorsMW(_: Request, res: Response, next: N
 		const authors = await searchAuthors({ q, limit });
 
 		// Add results to res.locals
-		(res.locals.authors as AuthorSelect[]) = authors;
+		(res.locals.authors as Author[]) = authors;
 
 		// Go to next MW
 		return next();

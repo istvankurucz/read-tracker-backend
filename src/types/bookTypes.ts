@@ -1,6 +1,6 @@
 import { LanguageCode } from "../constants/book/languageConstants";
 import { BookTable } from "../drizzle/schema/BookTable";
-import { AuthorSelect } from "./authorTypes";
+import { Author } from "./authorTypes";
 import { UserSelect } from "./userTypes";
 
 //#region Book DB types
@@ -55,7 +55,7 @@ export type ImageLinks = {
 
 // #region Book
 export type LocalBook = Omit<BookSelect, "userId" | "updatedAt" | "createdAt"> & {
-	authors: AuthorSelect[];
+	authors: Author[];
 	updatedAt: Date;
 	createdAt: Date;
 	user: UserSelect;

@@ -22,6 +22,8 @@ import validateUpdateBookDataMW from "../middlewares/book/validateUpdateBookData
 import updateBookPhotoMW from "../middlewares/book/updateBookPhotoMW";
 import updateBookMW from "../middlewares/book/updateBookMW";
 import updateBookAuthorsMW from "../middlewares/bookAuthor/updateBookAuthorsMW";
+import getUserBooksMW from "../middlewares/book/getUserBooksMW";
+import returnBooksMW from "../middlewares/book/returnBooksMW";
 
 const router = Router();
 
@@ -51,6 +53,9 @@ router.get(
 	sortBookResultsMW,
 	returnBookResultsMW
 );
+
+// Get user books
+router.get("/user", getUserBooksMW, returnBooksMW);
 
 // Get book
 router.get("/:bookId", validateBookIdMW, getBookMW, returnBookMW);

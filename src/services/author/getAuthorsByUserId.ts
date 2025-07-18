@@ -1,13 +1,13 @@
 import { db } from "../../drizzle/db";
 import { Author } from "../../types/authorTypes";
 
-export default async function getAuthors(ids: string[]): Promise<Author[]> {
+export default async function getAuthorsByUserId(userId: string): Promise<Author[]> {
 	// Get authors
 	const authors = await db.query.AuthorTable.findMany({
 		columns: {
 			userId: false,
 		},
-		where: (author, { inArray }) => inArray(author.id, ids),
+		where: (author, { eq }) => eq(author.userId, userId),
 	});
 
 	// Return authors

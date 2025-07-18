@@ -1,9 +1,9 @@
 import AppError from "../../classes/AppError";
-import { bookCoverPhotosBucket, supabase } from "../../config/supabase";
+import { bookCoverPhotosBucket, supabaseAdmin } from "../../config/supabase";
 
 export default async function deleteBookPhotoByBookId(bookId: string): Promise<void> {
 	// Get book photo
-	const { data, error: listError } = await supabase.storage
+	const { data, error: listError } = await supabaseAdmin.storage
 		.from(bookCoverPhotosBucket)
 		.list(bookId, {
 			limit: 1,
@@ -38,7 +38,7 @@ export default async function deleteBookPhotoByBookId(bookId: string): Promise<v
 	}
 
 	// Delete file
-	const { error: removeError } = await supabase.storage
+	const { error: removeError } = await supabaseAdmin.storage
 		.from(bookCoverPhotosBucket)
 		.remove([`${bookId}/${file.name}`]);
 

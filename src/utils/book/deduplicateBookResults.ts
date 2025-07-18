@@ -1,20 +1,9 @@
 import { BookResult } from "../../types/bookTypes";
+import createBookComparisonString from "./createBookComparisonString";
 
 type BookResultWithComparison = BookResult & { comparison: string };
 
 //#region Functions
-function createComparisonField(book: BookResult): string {
-	// Comparison pieces
-	const title = book.title.toLowerCase();
-	const subtitle = book.subtitle?.toLowerCase() ?? "";
-	const authors = book.authors
-		.map((author) => author.toLowerCase())
-		.toSorted((a, b) => a.localeCompare(b));
-
-	// Return comparison field
-	return `${title} | ${subtitle} | ${authors}`;
-}
-
 function deduplicateBooksByComparisonField(
 	books: BookResultWithComparison[]
 ): BookResultWithComparison[] {
@@ -63,7 +52,7 @@ export default function deduplicateBookResults(books: {
 	// Create comparison field
 	const booksWithComparison: BookResultWithComparison[] = allBooks.map((book) => ({
 		...book,
-		comparison: createComparisonField(book),
+		comparison: createBookComparisonString(book),
 	}));
 
 	// Filter books

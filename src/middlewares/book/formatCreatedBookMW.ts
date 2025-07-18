@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { BookSelect, LocalBook } from "../../types/bookTypes";
-import { AuthorSelect } from "../../types/authorTypes";
+import { Author } from "../../types/authorTypes";
 import { UserSelect } from "../../types/userTypes";
 
 export default function formatCreatedBookMW(_: Request, res: Response, next: NextFunction) {
 	// Get book, authors and user
 	const { book, authors, user } = res.locals as {
 		book: BookSelect;
-		authors: AuthorSelect[];
+		authors: Author[];
 		user: UserSelect;
 	};
 
