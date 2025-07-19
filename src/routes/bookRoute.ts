@@ -24,6 +24,11 @@ import updateBookMW from "../middlewares/book/updateBookMW";
 import updateBookAuthorsMW from "../middlewares/bookAuthor/updateBookAuthorsMW";
 import getUserBooksMW from "../middlewares/book/getUserBooksMW";
 import returnBooksMW from "../middlewares/book/returnBooksMW";
+import createUserBookMW from "../middlewares/userBook/createUserBookMW";
+import checkBookDeleteAccessMW from "../middlewares/book/checkBookDeleteAccessMW";
+import deleteBookCoverPhotoMW from "../middlewares/book/deleteBookCoverPhotoMW";
+import deleteBookMW from "../middlewares/book/deleteBookMW";
+import sendBookDeletedResponseMW from "../middlewares/book/sendBookDeletedResponseMW";
 
 const router = Router();
 
@@ -37,9 +42,10 @@ router.post(
 	validateCreateBookDataMW,
 	createBookMW,
 	createBookCoverPhotoMW,
-	updateBookMW, // Update book cover photo
+	updateBookMW,
 	createBookAuthorsMW,
 	formatCreatedBookMW,
+	createUserBookMW,
 	returnBookMW
 );
 
@@ -54,7 +60,7 @@ router.get(
 	returnBookResultsMW
 );
 
-// Get user books
+// Get books added by user
 router.get("/user", getUserBooksMW, returnBooksMW);
 
 // Get book
@@ -72,6 +78,17 @@ router.put(
 	updateBookMW,
 	updateBookAuthorsMW,
 	returnBookMW
+);
+
+// Delete book
+router.delete(
+	"/:bookId",
+	validateLocalBookIdMW,
+	getBookMW,
+	checkBookDeleteAccessMW,
+	deleteBookCoverPhotoMW,
+	deleteBookMW,
+	sendBookDeletedResponseMW
 );
 
 export { router as bookRoute };

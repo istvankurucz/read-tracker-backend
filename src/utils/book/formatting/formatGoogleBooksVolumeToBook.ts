@@ -20,7 +20,7 @@ export default function formatGoogleBooksVolumeToBook(volume: GoogleBooksVolume)
 		pages: volume.volumeInfo.pageCount ?? -1,
 		language: volume.volumeInfo.language,
 		isbn: isbn,
-		genre: volume.volumeInfo.categories?.[0] ?? null,
+		genre: volume.volumeInfo.categories?.[0]?.split(" / ")[0] ?? null,
 		description: volume.volumeInfo.description ?? null,
 		releaseDate: releaseDate,
 		source: "google",

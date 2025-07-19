@@ -14,7 +14,6 @@ export default async function searchGoogleBooks(options: {
 	const { data: response } = await googleBooksClient.get<GoogleBooksResponse>(
 		`?q=${q}${limit ? `&maxResults=${limit}` : ""}`
 	);
-	console.log("Google response:", response);
 
 	// Format response
 	const formattedBooks = formatGoogleBooksResponseToBookResults(response);
