@@ -9,8 +9,8 @@ import createUserBookMW from "../middlewares/userBook/createUserBookMW";
 import returnBookMW from "../middlewares/book/returnBookMW";
 import validateBookIdMW from "../middlewares/book/validateBookIdMW";
 import createLocalBookFromGoogleBookMW from "../middlewares/book/createLocalBookFromGoogleBookMW";
-import createBookAuthorsMW from "../middlewares/bookAuthor/createBookAuthorsMW";
-import formatCreatedBookMW from "../middlewares/book/formatCreatedBookMW";
+import createGoogleBookAuthorsMW from "../middlewares/book/createGoogleBookAuthorsMW";
+import formatCreatedLocalBookMW from "../middlewares/book/formatCreatedLocalBookMW";
 
 const router = Router({ mergeParams: true });
 
@@ -23,8 +23,8 @@ router.post(
 	validateBookIdMW,
 	getBookMW,
 	createLocalBookFromGoogleBookMW,
-	createBookAuthorsMW,
-	formatCreatedBookMW,
+	createGoogleBookAuthorsMW,
+	formatCreatedLocalBookMW,
 	createUserBookMW,
 	returnBookMW
 );

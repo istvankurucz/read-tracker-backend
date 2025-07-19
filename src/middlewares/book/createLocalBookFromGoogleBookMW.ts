@@ -8,14 +8,14 @@ export default async function createLocalBookFromGoogleBookMW(
 	res: Response,
 	next: NextFunction
 ) {
-	// Get user and book
+	// Get user and book data
 	const { user, book: bookData } = res.locals as { user: UserSelect; book: Book };
+
+	// Add book data to res.locals
+	(res.locals.bookData as Book) = bookData;
 
 	// Check local book
 	if (bookData.source === "local") return next();
-
-	// Add authors to res.locals
-	(res.locals.bookData as { authors: string[] }) = { authors: bookData.authors };
 
 	try {
 		// Create book
