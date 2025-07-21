@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { UserSelect } from "../../types/userTypes";
-import { ListSelect } from "../../types/listTypes";
+import { ListSelect, ListWithUserId } from "../../types/listTypes";
 import AppError from "../../classes/AppError";
 
 export default function checkListBookWriteAccessMW(_: Request, res: Response, next: NextFunction) {
 	// Get user and list
-	const { user, list } = res.locals as { user: UserSelect; list: ListSelect };
+	const { user, list } = res.locals as { user: UserSelect; list: ListSelect | ListWithUserId };
 
 	try {
 		// Check access

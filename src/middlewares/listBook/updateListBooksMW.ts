@@ -1,16 +1,18 @@
 import { Request, Response, NextFunction } from "express";
-import { List } from "../../types/listTypes";
+import { List, ListSelect, ListWithUserId } from "../../types/listTypes";
 import { UpdateListBookData } from "../../utils/listBook/validation/schemas/updateListBooksSchema";
 import createListBooks from "../../services/listBook/createListBooks";
 import getLocalBooks from "../../services/book/getLocalBooks";
-import { LocalBook } from "../../types/bookTypes";
 import getIdsToAddAndRemove from "../../utils/general/getIdsToAddAndRemove";
 import deleteListBooks from "../../services/listBook/deleteListBooks";
 
 export default async function updateListBooksMW(_: Request, res: Response, next: NextFunction) {
 	// Get list and book IDs
-	const { list, listBookData } = res.locals as {
-		list: List;
+	const {
+		list: { userId, ...list },
+		listBookData,
+	} = res.locals as {
+		list: ListWithUserId;
 		listBookData: UpdateListBookData;
 	};
 

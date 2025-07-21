@@ -4,22 +4,39 @@ import validateListIdMW from "../middlewares/list/validateListIdMW";
 import getAuthUserDataMW from "../middlewares/user/getAuthUserDataMW";
 import checkListBookWriteAccessMW from "../middlewares/listBook/checkListBookWriteAccessMW";
 import validateUpdateListBooksDataMW from "../middlewares/listBook/validateUpdateListBooksDataMW";
-import createListBooksMW from "../middlewares/listBook/updateListBooksMW";
-import getListMW from "../middlewares/list/getListMW";
+import updateListBooksMW from "../middlewares/listBook/updateListBooksMW";
 import returnListMW from "../middlewares/list/returnListMW";
+import validateLocalBookIdMW from "../middlewares/book/validateLocalBookIdMW";
+import getBookMW from "../middlewares/book/getBookMW";
+import getListSelectMW from "../middlewares/list/getListSelectMW";
+import deleteListBookMW from "../middlewares/listBook/deleteListBookMW";
+import sendListBookDeletedResponseMW from "../middlewares/listBook/sendListBookDeletedResponseMW";
+import getListWithUserIdMW from "../middlewares/list/getListWithUserIdMW";
 
 const router = Router({ mergeParams: true });
 
 // Add MWs
-router.use(authUserMW, getAuthUserDataMW, validateListIdMW, getListMW);
+router.use(authUserMW, getAuthUserDataMW, validateListIdMW);
 
 // Update books in list
 router.put(
 	"/",
+	getListWithUserIdMW,
 	checkListBookWriteAccessMW,
 	validateUpdateListBooksDataMW,
-	createListBooksMW,
+	updateListBooksMW,
 	returnListMW
+);
+
+// Delete book from list
+router.delete(
+	"/:bookId",
+	getListSelectMW,
+	validateLocalBookIdMW,
+	getBookMW,
+	checkListBookWriteAccessMW,
+	deleteListBookMW,
+	sendListBookDeletedResponseMW
 );
 
 export { router as listBookRoute };

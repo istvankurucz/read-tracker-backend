@@ -11,4 +11,7 @@ export type ListUpdate = Partial<Pick<ListSelect, "name" | "public">>;
 export type List = Omit<ListSelect, "userId"> & {
 	books: LocalBook[];
 };
+export type ListWithUserId = ListSelect & {
+	books: LocalBook[];
+};
 //#endregion
