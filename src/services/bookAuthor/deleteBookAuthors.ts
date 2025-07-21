@@ -1,4 +1,4 @@
-import { and, eq, or } from "drizzle-orm";
+import { and, eq, inArray, or } from "drizzle-orm";
 import { db } from "../../drizzle/db";
 import { BookAuthorTable } from "../../drizzle/schema/BookAuthorTable";
 
@@ -9,11 +9,5 @@ export default async function deleteBookAuthors(
 	// Delete joins
 	await db
 		.delete(BookAuthorTable)
-		.where(
-			or(
-				...authorIds.map((authorId) =>
-					and(eq(BookAuthorTable.bookId, bookId), eq(BookAuthorTable.authorId, authorId))
-				)
-			)
-		);
+		.where(and(eq(BookAuthorTable.bookId, bookId), inArray(BookAuthorTable.authorId, authorIds)));
 }

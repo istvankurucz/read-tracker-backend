@@ -15,7 +15,7 @@ import formatCreatedLocalBookMW from "../middlewares/book/formatCreatedLocalBook
 const router = Router({ mergeParams: true });
 
 // Add MWs
-router.use(authUserMW, validateUserIdMW, getAuthUserDataMW);
+router.use(authUserMW, /* validateUserIdMW, */ getAuthUserDataMW);
 
 // Create user book
 router.post(

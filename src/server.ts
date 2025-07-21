@@ -6,6 +6,8 @@ import { friendshipRote } from "./routes/friendshipRoute";
 import { bookRoute } from "./routes/bookRoute";
 import { authorRoute } from "./routes/authorRoute";
 import { userBookRoute } from "./routes/userBookRoute";
+import { listRoute } from "./routes/listRoute";
+import { listBookRoute } from "./routes/listBookRoute";
 import handleErrorMW from "./middlewares/error/handleErrorMW";
 
 // Create app instance
@@ -21,6 +23,8 @@ app.use("/api/users/:userId/friendships", friendshipRote);
 app.use("/api/books", bookRoute);
 app.use("/api/authors", authorRoute);
 app.use("/api/users/:userId/books", userBookRoute);
+app.use("/api/users/:userId/lists", listRoute);
+app.use("/api/lists/:listId/books", listBookRoute);
 
 // Error handler
 app.use(handleErrorMW);
