@@ -24,6 +24,7 @@ router.put(
 	getListWithUserIdMW,
 	checkListBookWriteAccessMW,
 	validateUpdateListBooksDataMW,
+	// Delete from other list if it's a system list
 	updateListBooksMW,
 	returnListMW
 );

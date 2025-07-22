@@ -11,6 +11,9 @@ import validateBookIdMW from "../middlewares/book/validateBookIdMW";
 import createLocalBookFromGoogleBookMW from "../middlewares/book/createLocalBookFromGoogleBookMW";
 import createGoogleBookAuthorsMW from "../middlewares/book/createGoogleBookAuthorsMW";
 import formatCreatedLocalBookMW from "../middlewares/book/formatCreatedLocalBookMW";
+import validateLocalBookIdMW from "../middlewares/book/validateLocalBookIdMW";
+import deleteUserBookMW from "../middlewares/userBook/deleteUserBookMW";
+import sendUserBookDeletedResponseMW from "../middlewares/userBook/sendUserBookDeletedResponseMW";
 
 const router = Router({ mergeParams: true });
 
@@ -31,5 +34,15 @@ router.post(
 
 // Get user books
 router.get("/", getUserBooksMW, returnBooksMW);
+
+// Delete user book
+router.delete(
+	"/:bookId",
+	validateLocalBookIdMW,
+	getBookMW,
+	deleteUserBookMW,
+	// Delete book reading
+	sendUserBookDeletedResponseMW
+);
 
 export { router as userBookRoute };
