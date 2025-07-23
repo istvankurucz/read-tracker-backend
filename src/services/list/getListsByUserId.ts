@@ -21,15 +21,15 @@ export default async function getListsByUserId(userId: string): Promise<List[]> 
 
 	// Map books to lists
 	const lists = listsRaw.map((list) => {
-		// List books
+		// List book IDs
 		const listBookIds = joins
 			.filter((join) => join.listId === list.id)
 			.map((join) => join.bookId);
 
-		return {
-			...list,
-			books: books.filter((book) => listBookIds.includes(book.id)),
-		};
+		// List books
+		const listBooks = books.filter((book) => listBookIds.includes(book.id));
+
+		return { ...list, books: listBooks };
 	});
 
 	// Return lists

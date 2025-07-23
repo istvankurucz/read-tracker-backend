@@ -23,6 +23,7 @@ app.use("/api/users/:userId/friendships", friendshipRote);
 app.use("/api/books", bookRoute);
 app.use("/api/authors", authorRoute);
 app.use("/api/users/:userId/books", userBookRoute);
+// app.use("/api/books/:bookId/readings", readingRoute)
 app.use("/api/users/:userId/lists", listRoute);
 app.use("/api/lists/:listId/books", listBookRoute);
 

@@ -29,6 +29,7 @@ router.post(
 	createGoogleBookAuthorsMW,
 	formatCreatedLocalBookMW,
 	createUserBookMW,
+	// Create reading
 	returnBookMW
 );
 
@@ -41,7 +42,7 @@ router.delete(
 	validateLocalBookIdMW,
 	getBookMW,
 	deleteUserBookMW,
-	// Delete book reading
+	// Delete book readings
 	sendUserBookDeletedResponseMW
 );
 
