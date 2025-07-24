@@ -14,6 +14,11 @@ import formatCreatedLocalBookMW from "../middlewares/book/formatCreatedLocalBook
 import validateLocalBookIdMW from "../middlewares/book/validateLocalBookIdMW";
 import deleteUserBookMW from "../middlewares/userBook/deleteUserBookMW";
 import sendUserBookDeletedResponseMW from "../middlewares/userBook/sendUserBookDeletedResponseMW";
+import validateUpdateUserBookListsDataMW from "../middlewares/userBook/validateUpdateUserBookListsDataMW";
+import getUserListsMW from "../middlewares/list/getUserListsMW";
+import checkUpdateUserBookListsAccessMW from "../middlewares/userBook/checkUpdateUserBookListsAccessMW";
+import updateUserBookListsMW from "../middlewares/userBook/updateUserBookListsMW";
+import returnListsMW from "../middlewares/list/returnListsMW";
 
 const router = Router({ mergeParams: true });
 
@@ -35,6 +40,18 @@ router.post(
 
 // Get user books
 router.get("/", getUserBooksMW, returnBooksMW);
+
+// Update lists the book assigned to
+router.put(
+	"/:bookId/lists",
+	validateBookIdMW,
+	getBookMW,
+	validateUpdateUserBookListsDataMW,
+	getUserListsMW,
+	checkUpdateUserBookListsAccessMW,
+	updateUserBookListsMW,
+	returnListsMW
+);
 
 // Delete user book
 router.delete(
