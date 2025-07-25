@@ -1,0 +1,1 @@
+ALTER TABLE "review" ADD CONSTRAINT "unique_book_id_and_user_id_pair" UNIQUE("book_id","user_id");

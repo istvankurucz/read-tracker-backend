@@ -1,4 +1,4 @@
-import { boolean, check, pgTable, real, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, check, pgTable, real, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
 import { id } from "../schemaHelpers";
 import { UserTable } from "./UserTable";
 import { BookTable } from "./BookTable";
@@ -29,6 +29,7 @@ export const ReviewTable = pgTable(
 			"comment_min_length",
 			sql`${review.comment} IS NULL OR char_length(${review.comment}) > 0`
 		),
+		unique("unique_book_id_and_user_id_pair").on(review.bookId, review.userId),
 	]
 );
 
