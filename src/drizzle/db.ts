@@ -6,7 +6,7 @@ import * as BookTable from "./schema/BookTable";
 import * as AuthorTable from "./schema/AuthorTable";
 import * as BookAuthorTable from "./schema/BookAuthorTable";
 import * as UserBookTable from "./schema/UserBookTable";
-import * as RatingTable from "./schema/ReviewTable";
+import * as ReviewTable from "./schema/ReviewTable";
 import * as ReadingTable from "./schema/ReadingTable";
 import * as ReadingSnapshotTable from "./schema/ReadingSnapshotTable";
 import * as GoalTable from "./schema/GoalTable";
@@ -24,7 +24,7 @@ const schema = {
 	...AuthorTable,
 	...BookAuthorTable,
 	...UserBookTable,
-	...RatingTable,
+	...ReviewTable,
 	...ReadingTable,
 	...ReadingSnapshotTable,
 	...GoalTable,

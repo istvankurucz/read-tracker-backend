@@ -11,7 +11,10 @@ export const ReviewTable = pgTable(
 		id,
 		rating: real("rating").notNull(),
 		finishedBook: boolean("finished_book").notNull().default(true),
-		timestamp: timestamp("timestamp").notNull().defaultNow(),
+		timestamp: timestamp("timestamp")
+			.notNull()
+			.defaultNow()
+			.$onUpdate(() => new Date()),
 		comment: text("comment"),
 		bookId: uuid("book_id")
 			.notNull()
