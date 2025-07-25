@@ -1,7 +1,7 @@
 import { relations, sql } from "drizzle-orm";
 import { check, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { UserBookTable } from "./UserBookTable";
-import { RatingTable } from "./RatingTable";
+import { ReviewTable } from "./ReviewTable";
 import { ReadingTable } from "./ReadingTable";
 import { GoalTable } from "./GoalTable";
 import { ListTable } from "./ListTable";
@@ -25,7 +25,7 @@ export const UserTableRelations = relations(UserTable, ({ many }) => {
 		booksAdded: many(BookTable),
 		authorsAdded: many(AuthorTable),
 		books: many(UserBookTable),
-		ratings: many(RatingTable),
+		reviews: many(ReviewTable),
 		readings: many(ReadingTable),
 		goals: many(GoalTable),
 		lists: many(ListTable),

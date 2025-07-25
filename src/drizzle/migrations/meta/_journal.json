@@ -57,6 +57,13 @@
       "when": 1752838511769,
       "tag": "0007_flowery_sage",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1753444853333,
+      "tag": "0008_solid_boomerang",
+      "breakpoints": true
     }
   ]
 }

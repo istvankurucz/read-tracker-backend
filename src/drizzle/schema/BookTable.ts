@@ -3,7 +3,7 @@ import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { relations, sql } from "drizzle-orm";
 import { BookAuthorTable } from "./BookAuthorTable";
 import { UserBookTable } from "./UserBookTable";
-import { RatingTable } from "./RatingTable";
+import { ReviewTable } from "./ReviewTable";
 import { ReadingTable } from "./ReadingTable";
 import { ListBookTable } from "./ListBookTable";
 import { languageCodeOptions } from "../../constants/book/languageConstants";
@@ -56,7 +56,7 @@ export const BookTableRelations = relations(BookTable, ({ one, many }) => {
 			references: [UserTable.id],
 		}),
 		users: many(UserBookTable),
-		ratings: many(RatingTable),
+		reviews: many(ReviewTable),
 		readings: many(ReadingTable),
 		lists: many(ListBookTable),
 	};
