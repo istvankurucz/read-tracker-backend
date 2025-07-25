@@ -56,9 +56,13 @@ export type ImageLinks = {
 // #region Book
 export type LocalBook = Omit<BookSelect, "userId" | "updatedAt" | "createdAt"> & {
 	authors: Author[];
+	rating: {
+		average: number;
+		count: number;
+	};
+	user: UserSelect;
 	updatedAt: Date;
 	createdAt: Date;
-	user: UserSelect;
 	source: "local";
 };
 export type GoogleBook = Omit<BookSelect, "userId" | "updatedAt" | "createdAt"> & {

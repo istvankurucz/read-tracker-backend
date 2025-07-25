@@ -7,6 +7,8 @@ import validateUpdateUserDataMW from "../middlewares/user/validateUpdateUserData
 import updateUserMW from "../middlewares/user/updateUserMW";
 import deleteAuthUserMW from "../middlewares/user/deleteAuthUserMW";
 import sendUserDeletedResponseMW from "../middlewares/user/sendUserDeletedResponseMW";
+import getUserReviewsMW from "../middlewares/review/getUserReviewsMW";
+import returnReviewsMW from "../middlewares/review/returnReviewsMW";
 
 const router = Router();
 
@@ -17,6 +19,9 @@ router.use(authUserMW);
 
 // Get user
 router.get("/:userId", validateUserIdMW, getUserMW, returnUserMW);
+
+// Get user reviews
+router.get("/:userId/reviews", validateUserIdMW, getUserMW, getUserReviewsMW, returnReviewsMW);
 
 // Update user
 router.put(

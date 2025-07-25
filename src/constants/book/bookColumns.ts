@@ -3,6 +3,7 @@ import { BookTable } from "../../drizzle/schema/BookTable";
 import { Author } from "../../types/authorTypes";
 import { AuthorTable } from "../../drizzle/schema/AuthorTable";
 import { UserTable } from "../../drizzle/schema/UserTable";
+import { ReviewTable } from "../../drizzle/schema/ReviewTable";
 
 export const BOOK_COLUMNS = {
 	id: BookTable.id,
@@ -18,6 +19,10 @@ export const BOOK_COLUMNS = {
 	genre: BookTable.genre,
 	description: BookTable.description,
 	releaseDate: BookTable.releaseDate,
+	rating: {
+		average: sql<number>`COALESCE(AVG(${ReviewTable.rating}), 0)`,
+		count: sql<number>`COUNT(DISTINCT ${ReviewTable.id})::int`,
+	},
 	user: {
 		id: UserTable.id,
 		name: UserTable.name,

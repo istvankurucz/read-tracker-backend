@@ -19,6 +19,7 @@ export default function formatCreatedBookMW(_: Request, res: Response, next: Nex
 		...restBook,
 		authors,
 		user,
+		rating: { average: 0, count: 0 },
 		source: "local",
 	};
 
