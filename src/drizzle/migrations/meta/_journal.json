@@ -92,6 +92,13 @@
       "when": 1753527798404,
       "tag": "0012_motionless_hex",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1753532899762,
+      "tag": "0013_goofy_nova",
+      "breakpoints": true
     }
   ]
 }
