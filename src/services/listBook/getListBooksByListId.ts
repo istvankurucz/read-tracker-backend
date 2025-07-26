@@ -8,6 +8,7 @@ import { BookTable } from "../../drizzle/schema/BookTable";
 import { BookAuthorTable } from "../../drizzle/schema/BookAuthorTable";
 import { AuthorTable } from "../../drizzle/schema/AuthorTable";
 import { UserTable } from "../../drizzle/schema/UserTable";
+import { ReviewTable } from "../../drizzle/schema/ReviewTable";
 
 export default async function getListBooksByListId(listId: string): Promise<LocalBook[]> {
 	// Get books
@@ -19,6 +20,7 @@ export default async function getListBooksByListId(listId: string): Promise<Loca
 		.innerJoin(BookAuthorTable, eq(BookAuthorTable.bookId, BookTable.id))
 		.innerJoin(AuthorTable, eq(BookAuthorTable.authorId, AuthorTable.id))
 		.innerJoin(UserTable, eq(BookTable.userId, UserTable.id))
+		.leftJoin(ReviewTable, eq(ReviewTable.bookId, BookTable.id))
 		.where(eq(ListBookTable.listId, listId))
 		.groupBy(
 			BookTable.id,

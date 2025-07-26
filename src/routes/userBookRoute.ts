@@ -19,6 +19,9 @@ import getUserListsMW from "../middlewares/list/getUserListsMW";
 import checkUpdateUserBookListsAccessMW from "../middlewares/userBook/checkUpdateUserBookListsAccessMW";
 import updateUserBookListsMW from "../middlewares/userBook/updateUserBookListsMW";
 import returnListsMW from "../middlewares/list/returnListsMW";
+import deleteUserBookReadingsMW from "../middlewares/reading/deleteUserBookReadingsMW";
+import getBookReadingsMW from "../middlewares/reading/getBookReadingsMW";
+import updateReadingAfterSystemListChangeMW from "../middlewares/reading/updateReadingAfterSystemListChangeMW";
 
 const router = Router({ mergeParams: true });
 
@@ -34,7 +37,6 @@ router.post(
 	createGoogleBookAuthorsMW,
 	formatCreatedLocalBookMW,
 	createUserBookMW,
-	// Create reading
 	returnBookMW
 );
 
@@ -50,6 +52,8 @@ router.put(
 	getUserListsMW,
 	checkUpdateUserBookListsAccessMW,
 	updateUserBookListsMW,
+	getBookReadingsMW,
+	updateReadingAfterSystemListChangeMW,
 	returnListsMW
 );
 
@@ -59,7 +63,7 @@ router.delete(
 	validateLocalBookIdMW,
 	getBookMW,
 	deleteUserBookMW,
-	// Delete book readings
+	deleteUserBookReadingsMW,
 	sendUserBookDeletedResponseMW
 );
 

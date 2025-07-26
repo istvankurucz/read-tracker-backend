@@ -14,6 +14,9 @@ export default async function updateUserBookListsMW(_: Request, res: Response, n
 		listsData: UpdateUserBookListsData;
 	};
 
+	// Add lists to res.locals before update
+	(res.locals.oldLists as List[]) = lists;
+
 	// Get book system list
 	const bookSystemList = lists.find(
 		(list) => list.system && list.books.map((book) => book.id).includes(book.id)

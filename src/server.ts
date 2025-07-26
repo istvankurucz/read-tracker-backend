@@ -6,6 +6,7 @@ import { friendshipRote } from "./routes/friendshipRoute";
 import { bookRoute } from "./routes/bookRoute";
 import { authorRoute } from "./routes/authorRoute";
 import { userBookRoute } from "./routes/userBookRoute";
+import { readingRoute } from "./routes/readingRoute";
 import { reviewRoute } from "./routes/reviewRoute";
 import { listRoute } from "./routes/listRoute";
 import { listBookRoute } from "./routes/listBookRoute";
@@ -24,7 +25,7 @@ app.use("/api/users/:userId/friendships", friendshipRote);
 app.use("/api/books", bookRoute);
 app.use("/api/authors", authorRoute);
 app.use("/api/users/:userId/books", userBookRoute);
-// app.use("/api/books/:bookId/readings", readingRoute)
+app.use("/api/books/:bookId/readings", readingRoute);
 app.use("/api/books/:bookId/reviews", reviewRoute);
 app.use("/api/users/:userId/lists", listRoute);
 app.use("/api/lists/:listId/books", listBookRoute);
