@@ -15,7 +15,7 @@ export const ReadingTable = pgTable(
 	"reading",
 	{
 		id,
-		status: readingStatusEnum("status").notNull().default("not started"),
+		status: readingStatusEnum("status").notNull(),
 		pages: integer("pages").notNull(),
 		startedAt: timestamp("started_at"),
 		finishedAt: timestamp("finished_at"),

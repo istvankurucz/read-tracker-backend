@@ -78,6 +78,13 @@
       "when": 1753515936351,
       "tag": "0010_massive_chronomancer",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1753526853182,
+      "tag": "0011_gray_grandmaster",
+      "breakpoints": true
     }
   ]
 }
