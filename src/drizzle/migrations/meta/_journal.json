@@ -99,6 +99,13 @@
       "when": 1753532899762,
       "tag": "0013_goofy_nova",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1753537205335,
+      "tag": "0014_remarkable_mandroid",
+      "breakpoints": true
     }
   ]
 }

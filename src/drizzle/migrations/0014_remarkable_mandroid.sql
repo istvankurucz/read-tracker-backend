@@ -1,0 +1,1 @@
+ALTER TABLE "reading" ALTER COLUMN "started_at" SET NOT NULL;
