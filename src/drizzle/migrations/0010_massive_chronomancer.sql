@@ -1,0 +1,1 @@
+ALTER TABLE "reading" ALTER COLUMN "pages" SET NOT NULL;

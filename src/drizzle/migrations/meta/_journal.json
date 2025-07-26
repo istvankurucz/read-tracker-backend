@@ -71,6 +71,13 @@
       "when": 1753468331747,
       "tag": "0009_goofy_bloodstorm",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1753515936351,
+      "tag": "0010_massive_chronomancer",
+      "breakpoints": true
     }
   ]
 }
