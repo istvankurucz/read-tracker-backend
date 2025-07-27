@@ -3,16 +3,11 @@ import { db } from "../../drizzle/db";
 import { Reading } from "../../types/readingTypes";
 import getLocalBook from "../book/getLocalBook";
 
-export default async function getReading(
-	id: string,
-	options: { userId: string }
-): Promise<Reading> {
-	// Extract options
-	const { userId } = options;
-
+export default async function getInProgressReadingByBookId(bookId: string): Promise<Reading> {
 	// Get reading
 	const readingRaw = await db.query.ReadingTable.findFirst({
 		columns: {
+			bookId: false,
 			userId: false,
 		},
 		with: {
@@ -23,14 +18,15 @@ export default async function getReading(
 				orderBy: (snapshot, { desc }) => desc(snapshot.timestamp),
 			},
 		},
-		where: (reading, { and, eq }) => and(eq(reading.id, id), eq(reading.userId, userId)),
+		where: (reading, { and, eq }) =>
+			and(eq(reading.status, "in progress"), eq(reading.bookId, bookId)),
 	});
 
 	// Check reading
 	if (!readingRaw) throw new AppError({ message: "Reading not found.", status: 404 });
 
 	// Get book
-	const book = await getLocalBook(readingRaw.bookId);
+	const book = await getLocalBook(bookId);
 
 	// Return reading
 	return { ...readingRaw, book };

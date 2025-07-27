@@ -9,6 +9,10 @@ import deleteAuthUserMW from "../middlewares/user/deleteAuthUserMW";
 import sendUserDeletedResponseMW from "../middlewares/user/sendUserDeletedResponseMW";
 import getUserReviewsMW from "../middlewares/review/getUserReviewsMW";
 import returnReviewsMW from "../middlewares/review/returnReviewsMW";
+import getUserCurrentlyReadingListMW from "../middlewares/list/getUserCurrentlyReadingListMW";
+import getUserReadingsMW from "../middlewares/reading/getUserReadingsMW";
+import getLatestUserReadingsMW from "../middlewares/reading/getLatestUserReadingsMW";
+import returnReadingsMW from "../middlewares/reading/returnReadingsMW";
 
 const router = Router();
 
@@ -19,6 +23,17 @@ router.use(authUserMW);
 
 // Get user
 router.get("/:userId", validateUserIdMW, getUserMW, returnUserMW);
+
+// Get latest readings
+router.get(
+	"/:userId/latest-readings",
+	validateUserIdMW,
+	getUserMW,
+	getUserReadingsMW,
+	getUserCurrentlyReadingListMW,
+	getLatestUserReadingsMW,
+	returnReadingsMW
+);
 
 // Get user reviews
 router.get("/:userId/reviews", validateUserIdMW, getUserMW, getUserReviewsMW, returnReviewsMW);

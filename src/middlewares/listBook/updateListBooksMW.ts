@@ -25,6 +25,9 @@ export default async function updateListBooksMW(_: Request, res: Response, next:
 		new: listBookData.bookIds,
 	});
 
+	// Add new book IDs to res.locals
+	(res.locals.newBookIds as string[]) = bookIdsToAdd;
+
 	try {
 		// Delete joins
 		if (bookIdsToRemove.length > 0) {

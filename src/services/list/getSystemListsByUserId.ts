@@ -3,7 +3,7 @@ import { List } from "../../types/listTypes";
 import mapBooksToList from "../../utils/list/mapBooksToList";
 import getLocalBooks from "../book/getLocalBooks";
 
-export default async function getListsByUserId(userId: string): Promise<List[]> {
+export default async function getSystemListsByUserId(userId: string): Promise<List[]> {
 	// Get lists
 	const listsRaw = await db.query.ListTable.findMany({
 		columns: {
@@ -16,7 +16,7 @@ export default async function getListsByUserId(userId: string): Promise<List[]> 
 				},
 			},
 		},
-		where: (list, { eq }) => eq(list.userId, userId),
+		where: (list, { and, eq }) => and(eq(list.userId, userId), eq(list.system, true)),
 	});
 
 	// Get books

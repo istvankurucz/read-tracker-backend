@@ -12,6 +12,9 @@ import getListSelectMW from "../middlewares/list/getListSelectMW";
 import deleteListBookMW from "../middlewares/listBook/deleteListBookMW";
 import sendListBookDeletedResponseMW from "../middlewares/listBook/sendListBookDeletedResponseMW";
 import getListWithUserIdMW from "../middlewares/list/getListWithUserIdMW";
+import updateReadingsAfterListBooksChangeMW from "../middlewares/reading/updateReadingsAfterListBooksChangeMW";
+import getUserSystemListsMW from "../middlewares/list/getUserSystemListsMW";
+import deleteListBooksFromOldSystemListMW from "../middlewares/list/deleteListBooksFromOldSystemListMW";
 
 const router = Router({ mergeParams: true });
 
@@ -24,8 +27,10 @@ router.put(
 	getListWithUserIdMW,
 	checkListBookWriteAccessMW,
 	validateUpdateListBooksDataMW,
-	// Delete from other list if it's a system list
+	getUserSystemListsMW,
 	updateListBooksMW,
+	deleteListBooksFromOldSystemListMW,
+	updateReadingsAfterListBooksChangeMW,
 	returnListMW
 );
 

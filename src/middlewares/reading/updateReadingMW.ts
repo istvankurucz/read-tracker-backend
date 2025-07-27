@@ -20,7 +20,11 @@ export default async function updateReadingMW(_: Request, res: Response, next: N
 			status: readingData.status,
 			pages: readingData.pages,
 			startedAt: readingData.startedAt ? new Date(readingData.startedAt) : undefined,
-			finishedAt: readingData.finishedAt ? new Date(readingData.finishedAt) : undefined,
+			finishedAt: readingData.finishedAt
+				? new Date(readingData.finishedAt)
+				: readingData.finishedAt === null
+				? null
+				: undefined,
 		});
 
 		// Update reading in res.locals
