@@ -4,6 +4,7 @@ import { ReadingTable } from "../../drizzle/schema/ReadingTable";
 import { Reading } from "../../types/readingTypes";
 import getReadingSnapshotsByReadingIds from "../readingSnapshot/getReadingSnapshotsByReadingIds";
 import mapSnapshotsToReading from "../../utils/reading/mapSnapshotsToReading";
+import getLocalBook from "../book/getLocalBook";
 
 export default async function getReadingsByUserIdAndBookId(ids: {
 	userId: string;
@@ -22,12 +23,18 @@ export default async function getReadingsByUserIdAndBookId(ids: {
 		orderBy: (reading, { asc }) => asc(reading.startedAt),
 	});
 
+	// Get book
+	const book = await getLocalBook(bookId);
+
+	// Add book to readings
+	const readingsWithBook = readingsRaw.map((reading) => ({ ...reading, book }));
+
 	// Get reading snapshots
-	const readingIds = readingsRaw.map((reading) => reading.id);
+	const readingIds = readingsWithBook.map((reading) => reading.id);
 	const snapshots = await getReadingSnapshotsByReadingIds(readingIds);
 
 	// Map snapshots to readings
-	const readings = readingsRaw.map((reading) => mapSnapshotsToReading(reading, snapshots));
+	const readings = readingsWithBook.map((reading) => mapSnapshotsToReading(reading, snapshots));
 
 	// Return readings
 	return readings;

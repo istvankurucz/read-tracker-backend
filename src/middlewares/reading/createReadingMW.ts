@@ -27,6 +27,7 @@ export default async function createReadingMW(_: Request, res: Response, next: N
 		// Add reading to res.locals
 		(res.locals.reading as Reading) = {
 			...reading,
+			book,
 			snapshots: [],
 		};
 

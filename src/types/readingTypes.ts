@@ -1,4 +1,5 @@
 import { ReadingTable } from "../drizzle/schema/ReadingTable";
+import { LocalBook } from "./bookTypes";
 import { ReadingSnapshot } from "./readingSnapshotTypes";
 
 //#region Reading DB types
@@ -11,6 +12,7 @@ export type ReadingUpdate = Partial<
 
 //#region Reading
 export type Reading = Omit<ReadingSelect, "userId" | "bookId"> & {
+	book: LocalBook;
 	snapshots: ReadingSnapshot[];
 };
 //#endregion
