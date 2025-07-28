@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { userRoute } from "./routes/userRoute";
 import { friendshipRote } from "./routes/friendshipRoute";
+import { goalRoute } from "./routes/goalRoute";
 import { bookRoute } from "./routes/bookRoute";
 import { authorRoute } from "./routes/authorRoute";
 import { userBookRoute } from "./routes/userBookRoute";
@@ -23,6 +24,7 @@ app.use(express.json());
 // Routes
 app.use("/api/users", userRoute);
 app.use("/api/users/:userId/friendships", friendshipRote);
+app.use("/api/users/:userId/goals", goalRoute);
 app.use("/api/books", bookRoute);
 app.use("/api/authors", authorRoute);
 app.use("/api/users/:userId/books", userBookRoute);
