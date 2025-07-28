@@ -1,4 +1,4 @@
-import { check, integer, pgEnum, pgTable, uuid } from "drizzle-orm/pg-core";
+import { check, integer, pgEnum, pgTable, unique, uuid } from "drizzle-orm/pg-core";
 import { createdAt, id, updatedAt } from "../schemaHelpers";
 import { goalTypeOptions } from "../../constants/goals/goalConstants";
 import { UserTable } from "./UserTable";
@@ -28,6 +28,7 @@ export const GoalTable = pgTable(
 		check("year_positive", sql`${goal.year} > 0`),
 		check("month_positive", sql`${goal.month} IS NULL OR ${goal.month} > 0`),
 		check("week_positive", sql`${goal.week} IS NULL OR ${goal.week} > 0`),
+		unique("unique_goal_date").on(goal.year, goal.month, goal.week),
 	]
 );
 

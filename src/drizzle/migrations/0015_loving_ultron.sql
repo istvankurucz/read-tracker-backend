@@ -1,0 +1,1 @@
+ALTER TABLE "goal" ADD CONSTRAINT "unique_goal_date" UNIQUE("year","month","week");
