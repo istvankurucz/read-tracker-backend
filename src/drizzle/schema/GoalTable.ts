@@ -26,8 +26,8 @@ export const GoalTable = pgTable(
 	(goal) => [
 		check("goal_positive", sql`${goal.target} > 0`),
 		check("year_positive", sql`${goal.year} > 0`),
-		check("month_positive", sql`${goal.month} IS NULL OR ${goal.month} > 0`),
-		check("week_positive", sql`${goal.week} IS NULL OR ${goal.week} > 0`),
+		check("month_nonnegative", sql`${goal.month} IS NULL OR ${goal.month} >= 0`),
+		check("week_nonnegative", sql`${goal.week} IS NULL OR ${goal.week} >= 0`),
 		unique("unique_goal_date").on(goal.year, goal.month, goal.week),
 	]
 );
