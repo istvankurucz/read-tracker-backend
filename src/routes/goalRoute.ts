@@ -8,6 +8,12 @@ import getUserGoalsMW from "../middlewares/goal/getUserGoalsMW";
 import returnGoalsMW from "../middlewares/goal/returnGoalsMW";
 import validateGoalIdMW from "../middlewares/goal/validateGoalIdMW";
 import getGoalMW from "../middlewares/goal/getGoalMW";
+import validateUpdateGoalDataMW from "../middlewares/goal/validateUpdateGoalDataMW";
+import updateGoalMW from "../middlewares/goal/updateGoalMW";
+import deleteGoalMW from "../middlewares/goal/deleteGoalMW";
+import sendGoalDeletedResponseMW from "../middlewares/goal/sendGoalDeletedResponseMW";
+import getGoalDataMW from "../middlewares/goal/getGoalDataMW";
+import checkUpdateGoalAccessMW from "../middlewares/goal/checkUpdateGoalAccessMW";
 
 const router = Router({ mergeParams: true });
 
@@ -27,12 +33,14 @@ router.get("/", getUserGoalsMW, returnGoalsMW);
 router.put(
 	"/:goalId",
 	validateGoalIdMW,
-	getGoalMW, //
-	// validate goal data
-	// update goal
+	getGoalDataMW,
+	checkUpdateGoalAccessMW,
+	validateUpdateGoalDataMW,
+	updateGoalMW,
 	returnGoalMW
 );
 
 // Delete goal
+router.delete("/:goalId", validateGoalIdMW, getGoalDataMW, deleteGoalMW, sendGoalDeletedResponseMW);
 
 export { router as goalRoute };

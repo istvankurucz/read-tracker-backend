@@ -5,24 +5,21 @@ import getWeekStartAndEndDate from "../../getWeekStartAndEndDate";
 // Get current date
 const now = new Date();
 
-export const createGoalSchema = z
+export const updateGoalSchema = z
 	.object({
 		target: z.int().min(1, "Target must be min 1."),
 		type: goalTypeSchema,
 		year: z.number().min(now.getFullYear(), "Year cannot be in the past."),
-		month: z
-			.union([
-				z.int().min(0, "Month must be min 0.").max(11, "Month cannot greater than 12."),
-				z.null(),
-			])
-			.optional(),
-		week: z
-			.union([
-				z.int().min(0, "Week must be min 0.").max(51, "Week cannot be greater than 52."),
-				z.null(),
-			])
-			.optional(),
+		month: z.union([
+			z.int().min(0, "Month must be min 0.").max(11, "Month cannot greater than 12."),
+			z.null(),
+		]),
+		week: z.union([
+			z.int().min(0, "Week must be min 0.").max(51, "Week cannot be greater than 52."),
+			z.null(),
+		]),
 	})
+	.partial()
 	.check((ctx) => {
 		// Get date values
 		const { type, year, month, week } = ctx.value;
@@ -113,4 +110,4 @@ export const createGoalSchema = z
 			}
 		}
 	});
-export type CreateGoalData = z.infer<typeof createGoalSchema>;
+export type UpdateGoalData = z.infer<typeof updateGoalSchema>;
