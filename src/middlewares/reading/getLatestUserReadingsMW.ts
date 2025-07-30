@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { Reading } from "../../types/readingTypes";
 import { List } from "../../types/listTypes";
 
-const TIME_2DAYS = 1000 * 60 * 60 * 24 * 2;
+const TIME_2WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 export default async function getLatestUserReadingsMW(
 	_: Request,
@@ -29,7 +29,7 @@ export default async function getLatestUserReadingsMW(
 		// Latest snapshot is within 2 days
 		const latestSnapshot = reading.snapshots[0];
 		if (!latestSnapshot) return false;
-		if (new Date().getTime() - latestSnapshot.timestamp.getTime() < TIME_2DAYS) return true;
+		if (new Date().getTime() - latestSnapshot.timestamp.getTime() < TIME_2WEEKS) return true;
 
 		// Default
 		return false;

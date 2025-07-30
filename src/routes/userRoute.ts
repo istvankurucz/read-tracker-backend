@@ -13,6 +13,10 @@ import getUserCurrentlyReadingListMW from "../middlewares/list/getUserCurrentlyR
 import getUserReadingsMW from "../middlewares/reading/getUserReadingsMW";
 import getLatestUserReadingsMW from "../middlewares/reading/getLatestUserReadingsMW";
 import returnReadingsMW from "../middlewares/reading/returnReadingsMW";
+import deleteUserBooksMW from "../middlewares/userBook/deleteUserBooksMW";
+import deleteUserReadingsMW from "../middlewares/reading/deleteUserReadingsMW";
+import deleteUserListsMW from "../middlewares/list/deleteUserListsMW";
+import deleteUserGoalsMW from "../middlewares/goal/deleteUserGoalsMW";
 
 const router = Router();
 
@@ -49,6 +53,17 @@ router.put(
 );
 
 // Delete user
-router.delete("/:userId", validateUserIdMW, getUserMW, deleteAuthUserMW, sendUserDeletedResponseMW);
+router.delete(
+	"/:userId",
+	validateUserIdMW,
+	getUserMW,
+	deleteAuthUserMW,
+	// delete friendships?
+	deleteUserBooksMW,
+	deleteUserReadingsMW,
+	deleteUserListsMW,
+	deleteUserGoalsMW,
+	sendUserDeletedResponseMW
+);
 
 export { router as userRoute };
