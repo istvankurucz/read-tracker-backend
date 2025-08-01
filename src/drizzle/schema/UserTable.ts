@@ -1,5 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import { check, pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { check, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { UserBookTable } from "./UserBookTable";
 import { ReviewTable } from "./ReviewTable";
 import { ReadingTable } from "./ReadingTable";
@@ -14,6 +14,7 @@ export const UserTable = pgTable(
 	{
 		id: uuid("id").primaryKey(),
 		name: text("name").notNull(),
+		deletedAt: timestamp("deleted_at"),
 	},
 	(user) => [check("name_min_length", sql`char_length(${user.name}) > 0`)]
 );
