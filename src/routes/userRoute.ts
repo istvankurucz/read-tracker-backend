@@ -17,6 +17,8 @@ import deleteUserBooksMW from "../middlewares/userBook/deleteUserBooksMW";
 import deleteUserReadingsMW from "../middlewares/reading/deleteUserReadingsMW";
 import deleteUserListsMW from "../middlewares/list/deleteUserListsMW";
 import deleteUserGoalsMW from "../middlewares/goal/deleteUserGoalsMW";
+import deleteUserMW from "../middlewares/user/deleteUserMW";
+import deleteUserFriendshipsMW from "../middlewares/friend/deleteUserFriendshipsMW";
 
 const router = Router();
 
@@ -58,7 +60,8 @@ router.delete(
 	validateUserIdMW,
 	getUserMW,
 	deleteAuthUserMW,
-	// delete friendships?
+	deleteUserMW,
+	deleteUserFriendshipsMW,
 	deleteUserBooksMW,
 	deleteUserReadingsMW,
 	deleteUserListsMW,

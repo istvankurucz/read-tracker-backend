@@ -1,6 +1,6 @@
 import { FriendshipStatus } from "../constants/friendships/friendshipConstants";
 import { FriendshipTable } from "../drizzle/schema/FriendshipTable";
-import { UserSelect } from "./userTypes";
+import { User } from "./userTypes";
 
 //#region Friendship DB type
 export type FriendshipSelect = typeof FriendshipTable.$inferSelect;
@@ -18,7 +18,7 @@ export type FriendshipResult = {
 
 //#region Friendship
 export type Friendship = Pick<FriendshipSelect, "id" | "status" | "updatedAt" | "createdAt"> & {
-	requester: UserSelect;
-	addressee: UserSelect;
+	requester: User;
+	addressee: User;
 };
 //#endregion

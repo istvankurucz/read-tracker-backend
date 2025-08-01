@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import getReviewsByUserId from "../../services/review/getReviewsByUserId";
 import { Review } from "../../types/reviewTypes";
 
 export default async function getUserReviewsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 
 	try {
 		// Get reviews

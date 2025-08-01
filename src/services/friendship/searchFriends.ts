@@ -1,4 +1,4 @@
-import { and, eq, ilike, like, not, or, sql } from "drizzle-orm";
+import { and, eq, ilike, isNull, like, not, or, sql } from "drizzle-orm";
 import { db } from "../../drizzle/db";
 import { UserTable } from "../../drizzle/schema/UserTable";
 import { FriendshipResult } from "../../types/friendshipTypes";
@@ -24,13 +24,20 @@ export default async function searchFriends(options: {
 				.leftJoin(
 					FriendshipTable,
 					or(
-						eq(FriendshipTable.requesterId, UserTable.id),
-						eq(FriendshipTable.addresseeId, UserTable.id)
+						and(
+							eq(FriendshipTable.requesterId, userId),
+							eq(FriendshipTable.addresseeId, UserTable.id)
+						),
+						and(
+							eq(FriendshipTable.addresseeId, userId),
+							eq(FriendshipTable.requesterId, UserTable.id)
+						)
 					)
 				)
 				.where(
 					and(
 						not(eq(UserTable.id, userId)),
+						isNull(UserTable.deletedAt),
 						or(
 							ilike(UserTable.name, `%${q}%`),
 							like(sql`CAST(${UserTable.id} AS TEXT)`, `%${q}%`)
@@ -48,13 +55,20 @@ export default async function searchFriends(options: {
 				.leftJoin(
 					FriendshipTable,
 					or(
-						eq(FriendshipTable.requesterId, UserTable.id),
-						eq(FriendshipTable.addresseeId, UserTable.id)
+						and(
+							eq(FriendshipTable.requesterId, userId),
+							eq(FriendshipTable.addresseeId, UserTable.id)
+						),
+						and(
+							eq(FriendshipTable.addresseeId, userId),
+							eq(FriendshipTable.requesterId, UserTable.id)
+						)
 					)
 				)
 				.where(
 					and(
 						not(eq(UserTable.id, userId)),
+						isNull(UserTable.deletedAt),
 						or(
 							ilike(UserTable.name, `%${q}%`),
 							like(sql`CAST(${UserTable.id} AS TEXT)`, `%${q}%`)

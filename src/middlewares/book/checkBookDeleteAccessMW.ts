@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { LocalBook } from "../../types/bookTypes";
 import AppError from "../../classes/AppError";
 import checkUsedUserBook from "../../services/userBook/checkUsedUserBook";
@@ -10,7 +10,7 @@ export default async function checkBookDeleteAccessMW(
 	next: NextFunction
 ) {
 	// Get user and book
-	const { user, book } = res.locals as { user: UserSelect; book: LocalBook };
+	const { user, book } = res.locals as { user: User; book: LocalBook };
 
 	try {
 		// Different user

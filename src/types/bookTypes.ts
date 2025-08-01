@@ -1,7 +1,7 @@
 import { LanguageCode } from "../constants/book/languageConstants";
 import { BookTable } from "../drizzle/schema/BookTable";
 import { Author } from "./authorTypes";
-import { UserSelect } from "./userTypes";
+import { User } from "./userTypes";
 
 //#region Book DB types
 export type BookSelect = typeof BookTable.$inferSelect;
@@ -60,7 +60,7 @@ export type LocalBook = Omit<BookSelect, "userId" | "updatedAt" | "createdAt"> &
 		average: number;
 		count: number;
 	};
-	user: UserSelect;
+	user: User;
 	updatedAt: Date;
 	createdAt: Date;
 	source: "local";

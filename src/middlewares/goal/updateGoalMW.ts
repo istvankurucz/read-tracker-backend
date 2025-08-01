@@ -6,12 +6,12 @@ import checkNonEmptyObject from "../../utils/general/checkNonEmptyObject";
 import getGoalStatus from "../../utils/goal/getGoalStatus";
 import getGoalStartAndEndDate from "../../utils/goal/getGoalStartAndEndDate";
 import getReadingsByUserIdAndDate from "../../services/reading/getReadingsByUserIdAndDate";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function updateGoalMW(_: Request, res: Response, next: NextFunction) {
 	// Get user, goal and goal data
 	const { user, goal, goalData } = res.locals as {
-		user: UserSelect;
+		user: User;
 		goal: Goal;
 		goalData: UpdateGoalData;
 	};

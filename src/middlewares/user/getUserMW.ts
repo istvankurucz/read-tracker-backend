@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import getUser from "../../services/user/getUser";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function getUserMW(req: Request, res: Response, next: NextFunction) {
 	// Get user ID
@@ -11,7 +11,7 @@ export default async function getUserMW(req: Request, res: Response, next: NextF
 		const user = await getUser(userId);
 
 		// Add user to res.locals
-		(res.locals.user as UserSelect) = user;
+		(res.locals.user as User) = user;
 
 		// Go to next MW
 		return next();

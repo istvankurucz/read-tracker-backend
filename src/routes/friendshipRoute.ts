@@ -5,7 +5,7 @@ import getUserMW from "../middlewares/user/getUserMW";
 import validateFriendSearchDataMW from "../middlewares/friend/validateFriendSearchDataMW";
 import searchFriendsMW from "../middlewares/friend/searchFriendsMW";
 import returnFriendsResultMW from "../middlewares/friend/returnFriendsResultMW";
-import getFriendshipsByUserIdMW from "../middlewares/friend/getFriendshipsByUserIdMW";
+import getUserFriendshipsMW from "../middlewares/friend/getUserFriendshipsMW";
 import returnFriendshipsMW from "../middlewares/friend/returnFriendshipsMW";
 import validateCreateFriendshipDataMW from "../middlewares/friend/validateCreateFriendshipDataMW";
 import createFriendshipMW from "../middlewares/friend/createFriendshipMW";
@@ -35,7 +35,7 @@ router.get("/search", validateFriendSearchDataMW, searchFriendsMW, returnFriends
 router.get("/:friendshipId", validateFriendshipIdMW, getFriendshipMW, returnFriendshipMW);
 
 // Get friendships
-router.get("/", getFriendshipsByUserIdMW, returnFriendshipsMW);
+router.get("/", getUserFriendshipsMW, returnFriendshipsMW);
 
 // Update friendship
 router.put(

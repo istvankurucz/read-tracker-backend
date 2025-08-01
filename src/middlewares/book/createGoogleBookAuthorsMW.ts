@@ -3,7 +3,7 @@ import { Book, BookSelect } from "../../types/bookTypes";
 import { Author } from "../../types/authorTypes";
 import getAuthorFromBookData from "../../utils/book/getAuthorFromBookData";
 import createBookAuthor from "../../services/bookAuthor/createBookAuthor";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function createGoogleBookAuthorsMW(
 	_: Request,
@@ -12,7 +12,7 @@ export default async function createGoogleBookAuthorsMW(
 ) {
 	// Get user, book, book data
 	const { user, book, bookData } = res.locals as {
-		user: UserSelect;
+		user: User;
 		book: BookSelect;
 		bookData: Book;
 	};

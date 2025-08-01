@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { Friendship } from "../../types/friendshipTypes";
 import checkFriendshipUpdateAccess from "../../utils/friend/validation/checkFriendshipUpdateAccess";
 
@@ -9,7 +9,7 @@ export default function checkFriendshipUpdateAccessMW(
 	next: NextFunction
 ) {
 	// Get friendship and user from res.locals
-	const { friendship, user } = res.locals as { friendship: Friendship; user: UserSelect };
+	const { friendship, user } = res.locals as { friendship: Friendship; user: User };
 
 	try {
 		// Check access

@@ -5,7 +5,7 @@ import getInProgressReadingByBookId from "../../services/reading/getInProgressRe
 import AppError from "../../classes/AppError";
 import createReading from "../../services/reading/createReading";
 import getLocalBook from "../../services/book/getLocalBook";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import updateReading from "../../services/reading/updateReading";
 import { ReadingStatus } from "../../constants/reading/readingStatusConstants";
 
@@ -16,7 +16,7 @@ export default async function updateReadingsAfterListBooksChangeMW(
 ) {
 	// Get user, list and new books
 	const { user, list, newBookIds } = res.locals as {
-		user: UserSelect;
+		user: User;
 		list: List;
 		newBookIds: string[];
 	};

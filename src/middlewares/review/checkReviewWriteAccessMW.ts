@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { Review } from "../../types/reviewTypes";
 import AppError from "../../classes/AppError";
 
 export default function checkReviewWriteAccessMW(_: Request, res: Response, next: NextFunction) {
 	// Get user and review
-	const { user, review } = res.locals as { user: UserSelect; review: Review };
+	const { user, review } = res.locals as { user: User; review: Review };
 
 	try {
 		// Check access

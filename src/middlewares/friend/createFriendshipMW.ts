@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { CreateFriendshipData } from "../../utils/friend/validation/schemas/createFriendshipSchema";
 import createFriendship from "../../services/friendship/createFriendship";
 import { Friendship } from "../../types/friendshipTypes";
@@ -8,7 +8,7 @@ import getUser from "../../services/user/getUser";
 export default async function createFriendshipMW(_: Request, res: Response, next: NextFunction) {
 	// Get user ID and addressee ID
 	const { user, friendshipData } = res.locals as {
-		user: UserSelect;
+		user: User;
 		friendshipData: CreateFriendshipData;
 	};
 

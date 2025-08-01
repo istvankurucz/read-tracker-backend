@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import getGoalsByUserId from "../../services/goal/getGoalsByUserId";
 import { Goal } from "../../types/goalTypes";
 
 export default async function getUserGoalsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 
 	try {
 		// Get goals

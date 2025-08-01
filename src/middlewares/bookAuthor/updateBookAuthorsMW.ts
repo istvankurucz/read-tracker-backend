@@ -6,12 +6,12 @@ import validateUUID from "../../utils/general/validateUUID";
 import getAuthorFromBookData from "../../utils/book/getAuthorFromBookData";
 import createBookAuthor from "../../services/bookAuthor/createBookAuthor";
 import { Author } from "../../types/authorTypes";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function updateBookAuthorsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user, book and book data
 	const { user, book, bookData } = res.locals as {
-		user: UserSelect;
+		user: User;
 		book: LocalBook;
 		bookData: UpdateBookData;
 	};

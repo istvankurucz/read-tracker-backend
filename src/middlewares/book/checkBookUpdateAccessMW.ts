@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { LocalBook } from "../../types/bookTypes";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import AppError from "../../classes/AppError";
 
 export default function checkBookUpdateAccessMW(_: Request, res: Response, next: NextFunction) {
 	// Get book and user
-	const { book, user } = res.locals as { book: LocalBook; user: UserSelect };
+	const { book, user } = res.locals as { book: LocalBook; user: User };
 
 	try {
 		// Check access

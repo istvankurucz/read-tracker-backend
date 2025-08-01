@@ -1,11 +1,8 @@
 import AppError from "../../../classes/AppError";
 import { Friendship } from "../../../types/friendshipTypes";
-import { UserSelect } from "../../../types/userTypes";
+import { User } from "../../../types/userTypes";
 
-export default function checkFriendshipUpdateAccess(
-	friendship: Friendship,
-	user: UserSelect
-): void {
+export default function checkFriendshipUpdateAccess(friendship: Friendship, user: User): void {
 	// Requester cannot modify pending request
 	if (friendship.status === "pending" && user.id !== friendship.addressee.id) {
 		throw new AppError({ message: "Access denied.", status: 403 });

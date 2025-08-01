@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import getListsByUserId from "../../services/list/getListsByUserId";
 import { List } from "../../types/listTypes";
 
 export default async function getUserListsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 
 	try {
 		// Get lists

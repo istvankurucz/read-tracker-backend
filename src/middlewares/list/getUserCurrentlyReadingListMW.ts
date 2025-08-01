@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import getCurrentlyReadingListByUserId from "../../services/list/getCurrentlyReadingListByUserId";
 import { List } from "../../types/listTypes";
 
@@ -9,7 +9,7 @@ export default async function getUserCurrentlyReadingListMW(
 	next: NextFunction
 ) {
 	// Get user
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 
 	try {
 		// Get list

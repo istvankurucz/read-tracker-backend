@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import getFriendship from "../../services/friendship/getFriendship";
 import AppError from "../../classes/AppError";
 import { Friendship } from "../../types/friendshipTypes";
@@ -7,7 +7,7 @@ import { Friendship } from "../../types/friendshipTypes";
 export default async function getFriendshipMW(req: Request, res: Response, next: NextFunction) {
 	// Get friendship ID from and user
 	const { friendshipId } = req.params as { friendshipId: string };
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 
 	try {
 		// Get friendship

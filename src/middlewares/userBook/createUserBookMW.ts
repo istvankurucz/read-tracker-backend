@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { LocalBook } from "../../types/bookTypes";
 import createUserBook from "../../services/userBook/createUserBook";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function createUserBookMW(_: Request, res: Response, next: NextFunction) {
 	// Get user and book
-	const { user, book } = res.locals as { user: UserSelect; book: LocalBook };
+	const { user, book } = res.locals as { user: User; book: LocalBook };
 
 	try {
 		// Create user book join

@@ -5,7 +5,7 @@ import { SystemListName } from "../../constants/list/systemListNames";
 import { Reading } from "../../types/readingTypes";
 import updateReading from "../../services/reading/updateReading";
 import createReading from "../../services/reading/createReading";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function updateReadingAfterSystemListChangeMW(
 	_: Request,
@@ -14,7 +14,7 @@ export default async function updateReadingAfterSystemListChangeMW(
 ) {
 	// Get user, book, lists before update, current lists and readings
 	const { user, book, oldLists, lists, readings } = res.locals as {
-		user: UserSelect;
+		user: User;
 		book: LocalBook;
 		oldLists: List[];
 		lists: List[];

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { FriendSearchData } from "../../utils/friend/validation/schemas/friendSearchSchema";
 import searchFriends from "../../services/friendship/searchFriends";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { FriendshipResult } from "../../types/friendshipTypes";
 
 export default async function searchFriendsMW(_: Request, res: Response, next: NextFunction) {
@@ -9,7 +9,7 @@ export default async function searchFriendsMW(_: Request, res: Response, next: N
 	const {
 		user,
 		searchData: { q, limit },
-	} = res.locals as { user: UserSelect; searchData: FriendSearchData };
+	} = res.locals as { user: User; searchData: FriendSearchData };
 
 	try {
 		// Get results

@@ -1,6 +1,6 @@
 import { ReviewTable } from "../drizzle/schema/ReviewTable";
 import { LocalBook } from "./bookTypes";
-import { UserSelect } from "./userTypes";
+import { User } from "./userTypes";
 
 //#region Review DB types
 export type ReviewSelect = typeof ReviewTable.$inferSelect;
@@ -10,7 +10,7 @@ export type ReviewUpdate = Partial<Pick<ReviewSelect, "rating" | "finishedBook" 
 
 //#region Review
 export type Review = Omit<ReviewSelect, "userId" | "bookId"> & {
-	user: UserSelect;
+	user: User;
 	book: LocalBook;
 };
 //#endregion

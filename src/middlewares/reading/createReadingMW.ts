@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateReadingData } from "../../utils/reading/validation/schemas/createReadingSchema";
 import createReading from "../../services/reading/createReading";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { LocalBook } from "../../types/bookTypes";
 import { Reading } from "../../types/readingTypes";
 
 export default async function createReadingMW(_: Request, res: Response, next: NextFunction) {
 	// Get user, book and reading data
 	const { user, book, readingData } = res.locals as {
-		user: UserSelect;
+		user: User;
 		book: LocalBook;
 		readingData: CreateReadingData;
 	};

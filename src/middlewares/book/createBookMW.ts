@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateBookData } from "../../utils/book/validation/schemas/createBookSchema";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import createBook from "../../services/book/createBook";
 import { BookSelect } from "../../types/bookTypes";
 
 export default async function createBookMW(_: Request, res: Response, next: NextFunction) {
 	// Get book data and user
-	const { bookData, user } = res.locals as { bookData: CreateBookData; user: UserSelect };
+	const { bookData, user } = res.locals as { bookData: CreateBookData; user: User };
 
 	try {
 		// Create book

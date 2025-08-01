@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import getReading from "../../services/reading/getReading";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { Reading } from "../../types/readingTypes";
 
 export default async function getReadingMW(req: Request, res: Response, next: NextFunction) {
 	// Get user and reading ID
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 	const { readingId } = req.params as { readingId: string };
 
 	try {

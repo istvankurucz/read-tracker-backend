@@ -4,12 +4,12 @@ import { BookSelect } from "../../types/bookTypes";
 import { Author } from "../../types/authorTypes";
 import createBookAuthor from "../../services/bookAuthor/createBookAuthor";
 import getAuthorFromBookData from "../../utils/book/getAuthorFromBookData";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function createBookAuthorsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user, book, book data, authors
 	const { user, book, bookData } = res.locals as {
-		user: UserSelect;
+		user: User;
 		book: BookSelect;
 		bookData: CreateBookData;
 	};

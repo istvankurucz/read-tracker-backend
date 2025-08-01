@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Book, BookSelect } from "../../types/bookTypes";
 import createBook from "../../services/book/createBook";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default async function createLocalBookFromGoogleBookMW(
 	_: Request,
@@ -9,7 +9,7 @@ export default async function createLocalBookFromGoogleBookMW(
 	next: NextFunction
 ) {
 	// Get user and book data
-	const { user, book: bookData } = res.locals as { user: UserSelect; book: Book };
+	const { user, book: bookData } = res.locals as { user: User; book: Book };
 
 	// Add book data to res.locals
 	(res.locals.bookData as Book) = bookData;

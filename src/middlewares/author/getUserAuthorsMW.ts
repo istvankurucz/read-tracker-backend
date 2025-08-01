@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import getAuthorsByUserId from "../../services/author/getAuthorsByUserId";
 import { Author } from "../../types/authorTypes";
 
 export default async function getUserAuthorsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user
-	const { user } = res.locals as { user: UserSelect };
+	const { user } = res.locals as { user: User };
 
 	try {
 		// Get user books

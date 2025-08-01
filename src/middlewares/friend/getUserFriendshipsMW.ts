@@ -3,11 +3,7 @@ import { UserSelect } from "../../types/userTypes";
 import getFriendshipsByUserId from "../../services/friendship/getFriendshipsByUserId";
 import { Friendship } from "../../types/friendshipTypes";
 
-export default async function getFriendshipsByUserIdMW(
-	_: Request,
-	res: Response,
-	next: NextFunction
-) {
+export default async function getUserFriendshipsMW(_: Request, res: Response, next: NextFunction) {
 	// Get user from res.locals
 	const { user } = res.locals as { user: UserSelect };
 

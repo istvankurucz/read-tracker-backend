@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { Book, BookSelect, LocalBook } from "../../types/bookTypes";
 import { Author } from "../../types/authorTypes";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 
 export default function formatCreatedLocalBookMW(_: Request, res: Response, next: NextFunction) {
 	// Get book, authors, book data and user
@@ -9,7 +9,7 @@ export default function formatCreatedLocalBookMW(_: Request, res: Response, next
 		book: BookSelect;
 		authors: Author[];
 		bookData: Book;
-		user: UserSelect;
+		user: User;
 	};
 
 	// Check local book

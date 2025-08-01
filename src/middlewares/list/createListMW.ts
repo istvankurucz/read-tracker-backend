@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { CreateListData } from "../../utils/list/validation/schemas/createListSchema";
 import createList from "../../services/list/createList";
-import { UserSelect } from "../../types/userTypes";
+import { User } from "../../types/userTypes";
 import { List } from "../../types/listTypes";
 
 export default async function createListMW(_: Request, res: Response, next: NextFunction) {
 	// Get user and list data
-	const { user, listData } = res.locals as { user: UserSelect; listData: CreateListData };
+	const { user, listData } = res.locals as { user: User; listData: CreateListData };
 
 	try {
 		// Create list
