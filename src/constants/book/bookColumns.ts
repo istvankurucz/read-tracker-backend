@@ -20,7 +20,7 @@ export const BOOK_COLUMNS = {
 	description: BookTable.description,
 	releaseDate: BookTable.releaseDate,
 	rating: {
-		average: sql<number>`COALESCE(AVG(${ReviewTable.rating}), 0)`,
+		average: sql<number>`ROUND(COALESCE(AVG(${ReviewTable.rating})::numeric, 0), 1)`,
 		count: sql<number>`COUNT(DISTINCT ${ReviewTable.id})::int`,
 	},
 	user: {
