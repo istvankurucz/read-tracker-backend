@@ -9,7 +9,7 @@ export default function checkListWriteAccessMW(_: Request, res: Response, next: 
 
 	try {
 		// Check access
-		if (list.userId !== user.id || list.system) {
+		if (list.userId !== user.id) {
 			throw new AppError({ message: "Access denied.", status: 403 });
 		}
 

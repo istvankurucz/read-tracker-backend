@@ -9,7 +9,10 @@ export default async function updateListMW(_: Request, res: Response, next: Next
 
 	try {
 		// Update list
-		const { userId, ...updatedList } = await updateList(list.id, listData);
+		const { userId, ...updatedList } = await updateList(list.id, {
+			name: list.system ? undefined : listData.name,
+			public: listData.public,
+		});
 
 		// Add updated list to res.locals
 		(res.locals.list as List) = {

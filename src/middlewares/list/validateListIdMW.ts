@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import validateUUID from "../../utils/general/validateUUID";
 import AppError from "../../classes/AppError";
 
-export default function validateListIdMW(req: Request, res: Response, next: NextFunction) {
+export default function validateListIdMW(req: Request, _: Response, next: NextFunction) {
 	// Get list ID
 	const { listId } = req.params;
 
