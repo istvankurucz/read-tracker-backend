@@ -17,6 +17,7 @@ export default async function getListsByUserId(userId: string): Promise<List[]> 
 			},
 		},
 		where: (list, { eq }) => eq(list.userId, userId),
+		orderBy: (list, { asc }) => asc(list.createdAt),
 	});
 
 	// Get books

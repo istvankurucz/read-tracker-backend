@@ -30,6 +30,15 @@ router.use(authUserMW);
 // Get user
 router.get("/:userId", validateUserIdMW, getUserMW, returnUserMW);
 
+// Get user readings
+router.get(
+	"/:userId/readings",
+	validateUserIdMW,
+	getUserMW,
+	getUserReadingsMW,
+	returnReadingsMW
+)
+
 // Get latest readings
 router.get(
 	"/:userId/latest-readings",

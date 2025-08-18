@@ -31,7 +31,11 @@ export default async function getReadingsByUserIdAndDate(params: {
 			and(
 				eq(reading.userId, userId),
 				and(isNotNull(reading.startedAt), gte(reading.startedAt, start)),
-				and(isNotNull(reading.finishedAt), lte(reading.finishedAt, end))
+				and(
+					isNotNull(reading.finishedAt),
+					eq(reading.status, "finished"),
+					lte(reading.finishedAt, end)
+				)
 			),
 		orderBy: (reading, { asc }) => asc(reading.startedAt),
 	});
