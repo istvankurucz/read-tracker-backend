@@ -1,4 +1,4 @@
-import { integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, integer, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
 import { id } from "../schemaHelpers";
 import { ReadingTable } from "./ReadingTable";
 import { check } from "drizzle-orm/gel-core";
@@ -12,6 +12,7 @@ export const ReadingSnapshotTable = pgTable(
 		timestamp: timestamp("timestamp").notNull().defaultNow(),
 		page: integer("page").notNull(),
 		time: integer("time"),
+		finishedBook: boolean("finished_book").notNull().default(false),
 		readingId: uuid("reading_id")
 			.notNull()
 			.references(() => ReadingTable.id, { onDelete: "cascade" }),

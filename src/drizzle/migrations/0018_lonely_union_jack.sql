@@ -1,0 +1,1 @@
+ALTER TABLE "reading_snapshot" ADD COLUMN "finished_book" boolean DEFAULT false NOT NULL;
