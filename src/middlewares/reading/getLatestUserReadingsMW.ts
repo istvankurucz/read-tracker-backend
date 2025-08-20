@@ -19,21 +19,26 @@ export default async function getLatestUserReadingsMW(
 	const currentlyReadingBookIds = currentlyReadingList.books.map((book) => book.id);
 
 	// Get readings the book they belong to is in Currently Reading list
-	const latestReadings = readings.filter((reading) => {
-		// Check reading status
-		if (reading.status !== "in progress") return false;
+	const latestReadings = readings
+		.filter((reading) => {
+			// Check reading status
+			if (reading.status !== "in progress") return false;
 
-		// Book is in Currenlty Reading list
-		if (currentlyReadingBookIds.includes(reading.book.id)) return true;
+			// Book is in Currenlty Reading list
+			if (currentlyReadingBookIds.includes(reading.book.id)) return true;
 
-		// Latest snapshot is within 2 days
-		const latestSnapshot = reading.snapshots[0];
-		if (!latestSnapshot) return false;
-		if (new Date().getTime() - latestSnapshot.timestamp.getTime() < TIME_2WEEKS) return true;
+			// Latest snapshot is within 2 days
+			const latestSnapshot = reading.snapshots[0];
+			if (!latestSnapshot) return false;
+			if (new Date().getTime() - latestSnapshot.timestamp.getTime() < TIME_2WEEKS) return true;
 
-		// Default
-		return false;
-	});
+			// Default
+			return false;
+		})
+		.toSorted(
+			(a, b) =>
+				(b.snapshots[0]?.timestamp.getTime() ?? 0) - (a.snapshots[0]?.timestamp.getTime() ?? 0)
+		);
 
 	// Add latest readings to res.locals
 	(res.locals.readings as Reading[]) = latestReadings;

@@ -15,6 +15,8 @@ export default function validateCreateReadingSnapshotDataMW(
 		// Validation
 		const snapshotData = validateCreateReadingSnapshotData(req.body, { maxPages: book.pages });
 
+		console.log("Snapshot data:", snapshotData);
+
 		// Add validated data to res.locals
 		(res.locals.snapshotData as CreateReadingSnapshotData) = snapshotData;
 

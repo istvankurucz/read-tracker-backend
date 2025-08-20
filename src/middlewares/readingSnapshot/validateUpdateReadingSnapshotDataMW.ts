@@ -11,9 +11,13 @@ export default function validateUpdateReadingSnapshotDataMW(
 	// Get book
 	const { book } = res.locals as { book: LocalBook };
 
+	console.log(req.body);
+
 	try {
 		// Validation
 		const snapshotData = validateUpdateReadingSnapshotData(req.body, { maxPages: book.pages });
+
+		console.log("Snapshot data:", snapshotData);
 
 		// Add validated data to res.locals
 		(res.locals.snapshotData as UpdateReadingSnapshotData) = snapshotData;

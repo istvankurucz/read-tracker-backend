@@ -14,6 +14,8 @@ import deleteReadingSnapshotMW from "../middlewares/readingSnapshot/deleteReadin
 import sendReadingSnapshotDeletedResponseMW from "../middlewares/readingSnapshot/sendReadingSnapshotDeletedResponseMW";
 import validateUpdateReadingSnapshotDataMW from "../middlewares/readingSnapshot/validateUpdateReadingSnapshotDataMW";
 import updateReadingSnapshotMW from "../middlewares/readingSnapshot/updateReadingSnapshotMW";
+import updateReadingSnapshotBookSystemListMW from "../middlewares/listBook/updateReadingSnapshotBookSystemListMW";
+import updateReadingStatusMW from "../middlewares/reading/updateReadingStatusMW";
 
 const router = Router({ mergeParams: true });
 
@@ -27,19 +29,21 @@ router.use(
 	getReadingMW
 );
 
-// Get reading snapshot
-router.get(
-	"/:snapshotId",
-	validateReadingSnapshotIdMW,
-	getReadingSnapshotMW,
-	returnReadingSnapshotMW
-);
-
 // Create reading snapshot
 router.post(
 	"/",
 	validateCreateReadingSnapshotDataMW,
 	createReadingSnapshotMW,
+	updateReadingStatusMW,
+	updateReadingSnapshotBookSystemListMW,
+	returnReadingSnapshotMW
+);
+
+// Get reading snapshot
+router.get(
+	"/:snapshotId",
+	validateReadingSnapshotIdMW,
+	getReadingSnapshotMW,
 	returnReadingSnapshotMW
 );
 
@@ -50,6 +54,8 @@ router.put(
 	getReadingSnapshotMW,
 	validateUpdateReadingSnapshotDataMW,
 	updateReadingSnapshotMW,
+	updateReadingStatusMW,
+	updateReadingSnapshotBookSystemListMW,
 	returnReadingSnapshotMW
 );
 

@@ -13,6 +13,7 @@ export function createReadingSnapshotSchema(params: { maxPages: number }) {
 				.max(maxPages, "Page must be lower than book pages."),
 			timestamp: z.iso.date("Invalid date."),
 			time: z.union([z.number().min(0, "Time must be positive."), z.null()]),
+			finishedBook: z.boolean(),
 		})
 		.check((ctx) => {
 			// Get timestamp

@@ -24,6 +24,7 @@ export default async function updateReadingSnapshotMW(
 			page: snapshotData.page,
 			timestamp: snapshotData.timestamp ? new Date(snapshotData.timestamp) : undefined,
 			time: snapshotData.time,
+			finishedBook: snapshotData.finishedBook,
 		});
 
 		// Update snapshot in res.locals

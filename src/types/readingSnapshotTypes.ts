@@ -4,7 +4,7 @@ import { ReadingSnapshotTable } from "../drizzle/schema/ReadingSnapshotTable";
 export type ReadingSnapshotSelect = typeof ReadingSnapshotTable.$inferSelect;
 export type ReadingSnapshotInsert = typeof ReadingSnapshotTable.$inferInsert;
 export type ReadingSnapshotUpdate = Partial<
-	Pick<ReadingSnapshotSelect, "page" | "time" | "timestamp">
+	Pick<ReadingSnapshotSelect, "page" | "time" | "timestamp" | "finishedBook">
 >;
 //#endregion
 

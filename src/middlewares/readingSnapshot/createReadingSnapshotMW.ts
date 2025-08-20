@@ -21,6 +21,7 @@ export default async function createReadingSnapshotMW(
 			page: snapshotData.page,
 			timestamp: new Date(snapshotData.timestamp),
 			time: snapshotData.time,
+			finishedBook: snapshotData.finishedBook,
 			readingId: reading.id,
 		});
 
